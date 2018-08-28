@@ -16,6 +16,18 @@ export default class MuiTheme extends React.Component {
         primary1Color: '#C62828',
         primary2Color: '#C62828',
         primary3Color: '#C62828'
+      },
+      overrides: {
+        MuiCard: {
+          root: {
+            width: '500px',
+          },
+        },
+        MuiTab: {
+          root: {
+            textTransform: 'initial'
+          }
+        }
       }
     })
 

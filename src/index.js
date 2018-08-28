@@ -1,6 +1,6 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { render } from 'preact'
 
 // Import components
 import Main from './components/Main'
@@ -11,7 +11,7 @@ require('./index.scss')
 // Copy the index.html file
 require('file-loader?name=[name].[ext]!./index.html')
 
-render (
+ReactDOM.render (
   <BrowserRouter>
     <div>
       <Route path="/" component={Main}/>

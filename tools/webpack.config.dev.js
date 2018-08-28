@@ -16,12 +16,6 @@ module.exports = {
       {test: /\.jsx?$/, exclude: /(node_modules)/, use: ['babel-loader', 'eslint-loader']}
     ]
   },
-  resolve: {
-    alias: {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
-    }
-  },
   output: {
     path: path.resolve(__dirname, "../dev"),
     filename: "bundle.min.js"
