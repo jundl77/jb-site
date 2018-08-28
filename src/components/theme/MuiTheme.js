@@ -1,13 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
-import createMuiTheme from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
 
-MuiTheme.propTypes = {
-  children: PropTypes.element.isRequired
-}
 
 export default class MuiTheme extends React.Component {
+
+  static propTypes = {
+    children: PropTypes.element.isRequired
+  }
 
   render() {
     const muiTheme = createMuiTheme({
@@ -20,7 +21,7 @@ export default class MuiTheme extends React.Component {
 
     return (
       <div>
-        <MuiThemeProvider muiTheme={muiTheme}>
+        <MuiThemeProvider theme={muiTheme}>
           <div>
             {this.props.children}
           </div>

@@ -4,11 +4,12 @@ import reactElementToJSXString from 'react-element-to-jsx-string'
 import {LiveError, LivePreview, LiveProvider} from 'react-live'
 import {UnControlled as CodeMirror} from 'react-codemirror2'
 
-LiveEdit.propTypes = {
-  children: PropTypes.element.isRequired
-}
 
 export default class LiveEdit extends React.Component {
+
+  static propTypes = {
+    children: PropTypes.element.isRequired
+  }
 
   constructor(props) {
     super(props)
@@ -21,7 +22,6 @@ export default class LiveEdit extends React.Component {
   _reactToString = (reactElement) => {
     return reactElementToJSXString(reactElement).split(' ref={undefined}').join('')
   }
-
   _updateCode = (editor, data, value) => {
     this.setState({
       code: value
@@ -43,7 +43,7 @@ export default class LiveEdit extends React.Component {
     return (
       <div>
         <CodeMirror value={this.state.code} onChange={this._updateCode} options={options} autoCursor={false}/>
-        <LiveProvider code = {this.state.code} mountStylesheet = {false}>
+        <LiveProvider code={this.state.code} mountStylesheet={false}>
           <LivePreview/>
           <LiveError/>
         </LiveProvider>
