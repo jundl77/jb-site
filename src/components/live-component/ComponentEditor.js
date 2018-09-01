@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import Grow from '@material-ui/core/Grow'
+import Popover from '@material-ui/core/Popover'
 
 
 export default class ComponentEditor extends React.Component {
@@ -13,6 +13,7 @@ export default class ComponentEditor extends React.Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
+    anchor: PropTypes.element.isRequired,
     onChange: PropTypes.func.isRequired,
   }
 
@@ -40,11 +41,13 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/xml/xml')
     }
 
-    if (!this.props.visible)
-      return( <div style={{display: 'none'}}/>)
-
     return (
-      <Grow in={this.props.visible}>
+      <Popover
+        open={this.props.visible}
+        anchorEl={this.props.anchor}
+        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+      >
         <Card elevation={15}>
           <AppBar position="static" color="default">
             <Tabs
@@ -61,7 +64,7 @@ export default class ComponentEditor extends React.Component {
           </AppBar>
           <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
         </Card>
-      </Grow>
+      </Popover>
     )
   }
 }

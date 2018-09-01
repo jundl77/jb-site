@@ -19,7 +19,7 @@ export default class LiveComponent extends React.Component {
     this.state = {
       code: this._reactToString(this.props.children),
       visibleEditor: false,
-      showEditorButton: false
+      anchor: false
     }
   }
 
@@ -27,19 +27,19 @@ export default class LiveComponent extends React.Component {
     return reactElementToJSXString(reactElement).split(' ref={undefined}').join('')
   }
 
-  _handlePopoverOpen = () => {
+  _handlePopoverOpen = event => {
     if (!this.state.visibleEditor)
-      this.setState({ showEditorButton: true })
+      this.setState({ anchor: event.currentTarget })
   }
 
   _handlePopoverClose = () => {
-    this.setState({ showEditorButton: false })
+    this.setState({ anchor: null })
   }
 
   _showEditor = () => {
     this.setState({
       visibleEditor: !this.state.visibleEditor,
-      showEditorButton: false
+      anchor: null
     })
   }
 
@@ -57,19 +57,22 @@ export default class LiveComponent extends React.Component {
         code
       </Button>
 
-    if (!this.state.showEditorButton)
+    if (this.state.anchor == null)
       buttonDOM = <div style={{display: 'none'}}/>
+
+    const livePreview = <LivePreview onMouseEnter={this._handlePopoverOpen} onMouseLeave={this._handlePopoverClose}/>
 
     return (
       <div>
         <LiveProvider code={this.state.code} mountStylesheet={false}>
-          <LivePreview onMouseEnter={this._handlePopoverOpen} onMouseLeave={this._handlePopoverClose}/>
+          {livePreview}
           <LiveError/>
         </LiveProvider>
-        <Grow in={this.state.showEditorButton}>
+        <Grow in={this.state.anchor != null}>
           {buttonDOM}
         </Grow>
-        <ComponentEditor code={this.state.code} onChange={this._updateCode} visible={this.state.visibleEditor}/>
+        <ComponentEditor code={this.state.code} anchor={this.state.anchor} onChange={this._updateCode}
+                         visible={this.state.visibleEditor}/>
       </div>
     )
   }
