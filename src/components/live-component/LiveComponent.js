@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button'
 import Popper from '@material-ui/core/Popper'
 import Paper from '@material-ui/core/Paper'
 import Grow from '@material-ui/core/Grow'
-
+import CodeIcon from '@material-ui/icons/Code'
 
 export default class LiveComponent extends React.Component {
 
@@ -53,9 +53,13 @@ export default class LiveComponent extends React.Component {
 
   _showEditor = () => {
     this.setState({
-      visibleEditor: !this.state.visibleEditor,
+      visibleEditor: true,
       visiblePopup: false
     })
+  }
+
+  _closeEditor = () => {
+    this.setState({ visibleEditor: false })
   }
 
   _updateCode = (editor, data, value) => {
@@ -87,14 +91,14 @@ export default class LiveComponent extends React.Component {
                         onClick={this._showEditor}
                         onMouseEnter={this._handlePopoverOpen}
                         onMouseLeave={this._handlePopoverClose}>
-                  code
+                  <CodeIcon/>
                 </Button>
               </Paper>
             </Grow>
           )}
         </Popper>
         <ComponentEditor code={this.state.code} anchor={this.state.anchor} onChange={this._updateCode}
-                         visible={this.state.visibleEditor}/>
+                         visible={this.state.visibleEditor} onClose={this._closeEditor}/>
       </div>
     )
   }
