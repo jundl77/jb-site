@@ -7,7 +7,6 @@ import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Popover from '@material-ui/core/Popover'
 
-
 export default class ComponentEditor extends React.Component {
 
   static propTypes = {

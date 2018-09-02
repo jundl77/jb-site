@@ -8,6 +8,7 @@ import Popper from '@material-ui/core/Popper'
 import Paper from '@material-ui/core/Paper'
 import Grow from '@material-ui/core/Grow'
 
+
 export default class LiveComponent extends React.Component {
 
   static propTypes = {
@@ -16,6 +17,8 @@ export default class LiveComponent extends React.Component {
 
   constructor(props) {
     super(props)
+
+    this.liveError = React.createRef()
 
     this.state = {
       code: this._reactToString(this.props.children),
@@ -61,11 +64,20 @@ export default class LiveComponent extends React.Component {
 
   render() {
 
+    // check if there has been an error
+    let color = 'transparent'
+    if (this.liveError.current != null && this.liveError.current.children.length > 0)
+      color = 'red'
+
     return (
       <div>
         <LiveProvider style={{display: 'flex'}} code={this.state.code} mountStylesheet={false}>
-          <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor} onMouseLeave={this._handlePopoverClose}/>
-          <LiveError/>
+          <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
+                       style={{backgroundColor: color}}
+                       onMouseLeave={this._handlePopoverClose}/>
+          <div ref={this.liveError}>
+            <LiveError style={{display: 'none'}}/>
+          </div>
         </LiveProvider>
         <Popper placement="bottom-start" open={this.state.visiblePopup} anchorEl={this.state.anchor} transition>
           {({ TransitionProps }) => (
