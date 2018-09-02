@@ -13,7 +13,7 @@ export default class ComponentEditor extends React.Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
-    anchor: PropTypes.element.isRequired,
+    anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
   }
 
@@ -46,7 +46,7 @@ export default class ComponentEditor extends React.Component {
         open={this.props.visible}
         anchorEl={this.props.anchor}
         anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        targetOrigin={{horizontal: 'left', vertical: 'top'}}
+        transformOrigin={{horizontal: 'left', vertical: 'top'}}
       >
         <Card elevation={15}>
           <AppBar position="static" color="default">

@@ -15,6 +15,22 @@ export default class Main extends React.Component {
             <LiveComponent>
               <h1>Hello World!</h1>
             </LiveComponent>
+
+            <div>
+              <h4>Write some fancy code</h4>
+            </div>
+            <div>
+              <h4>Write some fancy code</h4>
+            </div>
+            <div>
+              <h4>Write some fancy code</h4>
+            </div>
+            <div>
+              <h4>Write some fancy code</h4>
+            </div>
+            <div>
+              <h4>Write some fancy code</h4>
+            </div>
           </div>
         </MuiTheme>
       </div>

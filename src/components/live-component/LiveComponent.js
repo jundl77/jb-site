@@ -4,8 +4,9 @@ import reactElementToJSXString from 'react-element-to-jsx-string'
 import { LiveError, LivePreview, LiveProvider } from 'react-live'
 import ComponentEditor from './ComponentEditor'
 import Button from '@material-ui/core/Button'
+import Popper from '@material-ui/core/Popper'
+import Paper from '@material-ui/core/Paper'
 import Grow from '@material-ui/core/Grow'
-
 
 export default class LiveComponent extends React.Component {
 
@@ -19,7 +20,8 @@ export default class LiveComponent extends React.Component {
     this.state = {
       code: this._reactToString(this.props.children),
       visibleEditor: false,
-      anchor: false
+      visiblePopup: false,
+      anchor: null
     }
   }
 
@@ -27,19 +29,29 @@ export default class LiveComponent extends React.Component {
     return reactElementToJSXString(reactElement).split(' ref={undefined}').join('')
   }
 
-  _handlePopoverOpen = event => {
-    if (!this.state.visibleEditor)
-      this.setState({ anchor: event.currentTarget })
+  _handlePopoverOpenWithAnchor = event => {
+    if (!this.state.visibleEditor) {
+      this.setState({
+        anchor: event.currentTarget,
+        visiblePopup: true
+      })
+    }
+  }
+
+  _handlePopoverOpen = () => {
+    if (!this.state.visibleEditor) {
+      this.setState({visiblePopup: true})
+    }
   }
 
   _handlePopoverClose = () => {
-    this.setState({ anchor: null })
+    this.setState({ visiblePopup: false })
   }
 
   _showEditor = () => {
     this.setState({
       visibleEditor: !this.state.visibleEditor,
-      anchor: null
+      visiblePopup: false
     })
   }
 
@@ -49,28 +61,26 @@ export default class LiveComponent extends React.Component {
 
   render() {
 
-    let buttonDOM =
-      <Button size="small"
-              onClick={this._showEditor}
-              onMouseEnter={this._handlePopoverOpen}
-              onMouseLeave={this._handlePopoverClose}>
-        code
-      </Button>
-
-    if (this.state.anchor == null)
-      buttonDOM = <div style={{display: 'none'}}/>
-
-    const livePreview = <LivePreview onMouseEnter={this._handlePopoverOpen} onMouseLeave={this._handlePopoverClose}/>
-
     return (
       <div>
-        <LiveProvider code={this.state.code} mountStylesheet={false}>
-          {livePreview}
+        <LiveProvider style={{display: 'flex'}} code={this.state.code} mountStylesheet={false}>
+          <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor} onMouseLeave={this._handlePopoverClose}/>
           <LiveError/>
         </LiveProvider>
-        <Grow in={this.state.anchor != null}>
-          {buttonDOM}
-        </Grow>
+        <Popper placement="bottom-start" open={this.state.visiblePopup} anchorEl={this.state.anchor} transition>
+          {({ TransitionProps }) => (
+            <Grow {...TransitionProps} timeout={150}>
+              <Paper>
+                <Button size="small"
+                        onClick={this._showEditor}
+                        onMouseEnter={this._handlePopoverOpen}
+                        onMouseLeave={this._handlePopoverClose}>
+                  code
+                </Button>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
         <ComponentEditor code={this.state.code} anchor={this.state.anchor} onChange={this._updateCode}
                          visible={this.state.visibleEditor}/>
       </div>
