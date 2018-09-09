@@ -36,13 +36,14 @@ export default class ComponentEditor extends React.Component {
 
   render() {
     const options = {
-      mode: 'xml',
+      mode: 'javascript',
       theme: 'material',
       lineNumbers: true
     }
 
     if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
       require('codemirror/mode/xml/xml')
+      require('codemirror/mode/javascript/javascript')
     }
 
     return (

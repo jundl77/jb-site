@@ -11,3 +11,4 @@ bundle.min.js
 
 # Other
 *.log
+.DS_Store

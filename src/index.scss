@@ -1,4 +1,5 @@
-@import './components/main';
+@import 'components/main';
+@import 'components/theme/theme';
 @import 'components/live-component/editor';
 
 @import '../node_modules/codemirror/lib/codemirror.css';

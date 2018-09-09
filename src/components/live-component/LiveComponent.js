@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import reactElementToJSXString from 'react-element-to-jsx-string'
 import { LiveError, LivePreview, LiveProvider } from 'react-live'
 import ComponentEditor from './ComponentEditor'
 import Button from '@material-ui/core/Button'
@@ -12,24 +11,30 @@ import CodeIcon from '@material-ui/icons/Code'
 export default class LiveComponent extends React.Component {
 
   static propTypes = {
-    children: PropTypes.element.isRequired
+    previewStyles: PropTypes.object,
+    code: PropTypes.string.isRequired
   }
 
   constructor(props) {
     super(props)
 
     this.liveError = React.createRef()
-
     this.state = {
-      code: this._reactToString(this.props.children),
+      code: this._formatCodeString(this.props.code),
       visibleEditor: false,
       visiblePopup: false,
       anchor: null
     }
   }
 
-  _reactToString = reactElement => {
-    return reactElementToJSXString(reactElement).split(' ref={undefined}').join('')
+  _formatCodeString = code => {
+    const re = new RegExp('^( *)')
+
+    let lines = code.split('\n')
+    lines = lines.filter(line => line.trim().length > 0)
+
+    const min = lines.reduce((len, str) => Math.min(re.exec(str)[0].length, len), 1000, lines)
+    return lines.map(line => line.replace(' '.repeat(min), ''), lines).join('\n')
   }
 
   _handlePopoverOpenWithAnchor = event => {
@@ -73,11 +78,16 @@ export default class LiveComponent extends React.Component {
     if (this.liveError.current != null && this.liveError.current.children.length > 0)
       color = 'red'
 
+    const previewStyles = {
+      ...this.props.previewStyles,
+      backgroundColor: color
+    }
+
     return (
       <div>
         <LiveProvider style={{display: 'flex'}} code={this.state.code} mountStylesheet={false}>
           <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
-                       style={{backgroundColor: color}}
+                       style={previewStyles}
                        onMouseLeave={this._handlePopoverClose}/>
           <div ref={this.liveError}>
             <LiveError style={{display: 'none'}}/>
