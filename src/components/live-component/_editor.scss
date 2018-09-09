@@ -1,17 +1,17 @@
 .component-editor-enter {
-    opacity: 0.01;
-    transition: opacity 1s ease-in;
+  opacity: 0.01;
+  transition: opacity 1s ease-in;
 }
 
 .component-editor-enter.component-editor-enter-active {
-    opacity: 1;
+  opacity: 1;
 }
 
 .component-editor-leave {
-    opacity: 1;
-    transition: opacity 1s ease-in;
+  opacity: 1;
+  transition: opacity 1s ease-in;
 }
 
 .component-editor-leave.component-editor-leave-active {
-    opacity: 0.01;
+  opacity: 0.01;
 }

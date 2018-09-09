@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
+import {UnControlled as CodeMirror} from 'react-codemirror2'
 import Card from '@material-ui/core/Card'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
@@ -19,6 +19,9 @@ export default class ComponentEditor extends React.Component {
     onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
   }
+  _handleTabChange = (event, tabValue) => {
+    this.setState({tabValue})
+  }
 
   constructor(props) {
     super(props)
@@ -28,10 +31,6 @@ export default class ComponentEditor extends React.Component {
       tabValue: 0,
       editorDisplay: 'none'
     }
-  }
-
-  _handleTabChange = (event, tabValue) => {
-    this.setState({ tabValue })
   }
 
   render() {
@@ -67,9 +66,9 @@ export default class ComponentEditor extends React.Component {
                 value={this.state.tabValue}
                 onChange={this._handleTabChange}
               >
-                <Tab label="React" style={{width:'5rem'}}/>
-                <Tab label="Haskell" style={{width:'5rem'}}/>
-                <Tab label="Rust" style={{width:'5rem'}} />
+                <Tab label="React" style={{width: '5rem'}}/>
+                <Tab label="Haskell" style={{width: '5rem'}}/>
+                <Tab label="Rust" style={{width: '5rem'}}/>
               </Tabs>
             </Toolbar>
           </AppBar>
