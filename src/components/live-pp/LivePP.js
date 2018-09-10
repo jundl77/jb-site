@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import LiveComponent from '../live-component/LiveComponent'
 
 export default class LiveParagraph extends React.Component {
