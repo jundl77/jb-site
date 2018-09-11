@@ -13,19 +13,19 @@ export default class MuiTheme extends React.Component {
   render() {
     const muiTheme = createMuiTheme({
       palette: {
-        primary1Color: '#C62828',
-        primary2Color: '#C62828',
-        primary3Color: '#C62828'
+        primary: {
+          main: '#2196F3'
+        }
       },
       overrides: {
         MuiCard: {
           root: {
-            width: '500px',
+            width: 'auto',
           },
         },
         MuiTab: {
           root: {
-            textTransform: 'initial'
+            textTransform: 'initial',
           }
         }
       }

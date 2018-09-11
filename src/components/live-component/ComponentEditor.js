@@ -5,7 +5,6 @@ import Card from '@material-ui/core/Card'
 import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import Popover from '@material-ui/core/Popover'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
@@ -15,12 +14,10 @@ export default class ComponentEditor extends React.Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
     visible: PropTypes.bool.isRequired,
+    hoverable: PropTypes.bool.isRequired,
     anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
-  }
-  _handleTabChange = (event, tabValue) => {
-    this.setState({tabValue})
   }
 
   constructor(props) {
@@ -31,6 +28,10 @@ export default class ComponentEditor extends React.Component {
       tabValue: 0,
       editorDisplay: 'none'
     }
+  }
+
+  _handleTabChange = (event, tabValue) => {
+    this.setState({tabValue})
   }
 
   render() {
@@ -45,25 +46,16 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/javascript/javascript')
     }
 
-    return (
-      <Popover
-        open={this.props.visible}
-        anchorEl={this.props.anchor}
-        anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-        transformOrigin={{horizontal: 'left', vertical: 'top'}}
-      >
-        <Card elevation={15}>
+    // Style differently depending on whether it is hoverable or not
+    if (!this.props.hoverable) {
+      return (
+        <div>
           <AppBar position="static" color="default">
             <Toolbar>
-              <Button color="inherit"
-                      onClick={this.props.onClose}
-                      aria-label="Menu"
-                      style={{display: 'inline-block'}}>
-                <CloseIcon/>
-              </Button>
               <Tabs
                 style={{display: 'inline-block'}}
                 value={this.state.tabValue}
+                indicatorColor='primary'
                 onChange={this._handleTabChange}
               >
                 <Tab label="React" style={{width: '5rem'}}/>
@@ -73,8 +65,31 @@ export default class ComponentEditor extends React.Component {
             </Toolbar>
           </AppBar>
           <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
-        </Card>
-      </Popover>
+        </div>
+      )
+    }
+
+    return (
+      <Card elevation={3}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Button color="inherit" onClick={this.props.onClose} aria-label="Menu" style={{display: 'inline-block'}}>
+              <CloseIcon/>
+            </Button>
+            <Tabs
+              style={{display: 'inline-block'}}
+              value={this.state.tabValue}
+              indicatorColor='primary'
+              onChange={this._handleTabChange}
+            >
+              <Tab label="React" style={{width: '5rem'}}/>
+              <Tab label="Haskell" style={{width: '5rem'}}/>
+              <Tab label="Rust" style={{width: '5rem'}}/>
+            </Tabs>
+          </Toolbar>
+        </AppBar>
+        <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
+      </Card>
     )
   }
 }

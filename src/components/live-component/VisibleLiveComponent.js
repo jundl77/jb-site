@@ -1,12 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {LiveError, LivePreview, LiveProvider} from 'react-live'
-import HoverableComponentEditor from './HoverableComponentEditor'
-import Button from '@material-ui/core/Button'
-import Popper from '@material-ui/core/Popper'
-import Paper from '@material-ui/core/Paper'
-import Grow from '@material-ui/core/Grow'
-import CodeIcon from '@material-ui/icons/Code'
+import ComponentEditor from './ComponentEditor'
+import Card from '@material-ui/core/Card'
 
 export default class LiveComponent extends React.Component {
 
@@ -78,30 +74,23 @@ export default class LiveComponent extends React.Component {
 
     return (
       <div>
-        <LiveProvider style={{display: 'flex'}} code={this.state.code} mountStylesheet={false}>
-          <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
-                       style={previewStyles}
-                       onMouseLeave={this._handlePopoverClose}/>
-          <div ref={this.liveError}>
-            <LiveError style={{display: 'none'}}/>
-          </div>
-        </LiveProvider>
-        <Popper placement="bottom-start" open={this.state.visiblePopup} anchorEl={this.state.anchor} transition>
-          {({TransitionProps}) => (
-            <Grow {...TransitionProps} timeout={150}>
-              <Paper>
-                <Button size="small"
-                        onClick={this._showEditor}
-                        onMouseEnter={this._handlePopoverOpen}
-                        onMouseLeave={this._handlePopoverClose}>
-                  <CodeIcon/>
-                </Button>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-        <HoverableComponentEditor code={this.state.code} anchor={this.state.anchor} onChange={this._updateCode}
-                                  visible={this.state.visibleEditor} onClose={this._closeEditor}/>
+        <Card elevation={20}>
+          <LiveProvider style={{display: 'flex', backgroundColor: '#F5F5F5', borderBottom: '2px solid #2196F3'}}
+                        code={this.state.code} mountStylesheet={false}>
+            <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
+                         style={previewStyles}
+                         onMouseLeave={this._handlePopoverClose}/>
+            <div ref={this.liveError}>
+              <LiveError style={{display: 'none'}}/>
+            </div>
+          </LiveProvider>
+          <ComponentEditor code={this.state.code}
+                           hoverable={false}
+                           anchor={this.state.anchor}
+                           onChange={this._updateCode}
+                           visible={true}
+                           onClose={this._closeEditor}/>
+        </Card>
       </div>
     )
   }
