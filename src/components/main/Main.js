@@ -6,7 +6,7 @@ export default class Main extends React.Component {
 
   render() {
     return (
-      <App>
+      <App title="Julian Brendl">
         <div className="container pt5">
           <div className="row pb5">
             <div className="col-md-10 col-xs-9 center">

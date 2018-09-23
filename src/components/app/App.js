@@ -6,6 +6,7 @@ import LiveNavbar from '../live-navbar/LiveNavbar'
 
 export default class App extends React.Component {
   static propTypes = {
+    title: PropTypes.string.isRequired,
     children: PropTypes.element.isRequired
   }
 
@@ -15,10 +16,9 @@ export default class App extends React.Component {
         <MuiTheme>
           <div>
             <div className="container">
-              <LiveHero/>
+              <LiveHero title={this.props.title}/>
               <LiveNavbar/>
             </div>
-
             {this.props.children}
           </div>
         </MuiTheme>
