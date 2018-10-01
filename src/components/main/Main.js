@@ -25,7 +25,10 @@ export default class Main extends React.Component {
                       <div style={styles}>
                         <h1 className="pb3">Hi!</h1>
                         <div className="pb3">I'm Julian, and I am a comp-sci student in Germany.</div>
-                        <div>Hover over any element (not this one) on this website for a little surprise.</div>
+                        <div>
+                          <strong>Hover over any element on this website </strong>
+                          (except for this one) for a little surprise.
+                        </div>
                       </div>
                     )
                   }

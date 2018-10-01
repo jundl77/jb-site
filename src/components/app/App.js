@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import MuiTheme from '../theme/MuiTheme'
 import LiveHero from '../live-hero/LiveHero'
 import LiveNavbar from '../live-navbar/LiveNavbar'
+import LiveFooter from '../live-footer/LiveFooter'
 
 export default class App extends React.Component {
   static propTypes = {
@@ -12,16 +13,19 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <div className="pa5">
-        <MuiTheme>
-          <div>
-            <div className="container">
-              <LiveHero title={this.props.title}/>
-              <LiveNavbar/>
+      <div>
+        <div className="pt4 pa2" style={{minHeight: '95vh'}}>
+          <MuiTheme>
+            <div>
+              <div className="container">
+                <LiveHero title={this.props.title}/>
+                <LiveNavbar/>
+              </div>
+              {this.props.children}
             </div>
-            {this.props.children}
-          </div>
-        </MuiTheme>
+          </MuiTheme>
+        </div>
+        <LiveFooter/>
       </div>
     )
   }

@@ -11,7 +11,8 @@ export default class LiveNavbar extends React.Component {
 
             // Define CSS styles for the UI element
             const styles = {
-              fontFamily: 'Roboto Mono, monospace'
+              fontFamily: 'Roboto Mono, monospace',
+              color: '#707070'
             }
 
             // Render the UI element
@@ -26,12 +27,12 @@ export default class LiveNavbar extends React.Component {
 
   render() {
     return (
-      <nav className="navbar header-nav header-nav-light navbar-expand-lg">
+      <nav className="navbar header-nav navbar-expand navbar-scroll" style={{paddingLeft: 0, paddingRight: 0}}>
         <ul className="navbar-nav center">
-          <li>{this._generateNavbarElement('/', '// Me')}</li>
+          <li style={{marginLeft: 0}}>{this._generateNavbarElement('/', '// Me')}</li>
           <li>{this._generateNavbarElement('projects', '// Projects')}</li>
           <li>{this._generateNavbarElement('https://github.com/jundl77', '// GitHub')}</li>
-          <li>{this._generateNavbarElement('https://www.linkedin.com/in/julianbrendl/', '// LinkedIn')}</li>
+          <li style={{marginRight: 0}}>{this._generateNavbarElement('https://www.linkedin.com/in/julianbrendl/', '// LinkedIn')}</li>
         </ul>
       </nav>
     )

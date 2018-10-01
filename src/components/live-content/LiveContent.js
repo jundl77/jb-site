@@ -20,8 +20,14 @@ export default class LiveContent extends React.Component {
           render() {
 
             // Define CSS styles for the UI element
-            const textStyles = {
+            const titleStyles = {
               fontFamily: 'Roboto Mono, monospace'
+            }
+
+            // Define CSS styles for the UI element
+            const textStyles = {
+              fontFamily: 'Roboto Mono, monospace',
+              color: '#707070'
             }
 
             // Render the UI element
@@ -36,11 +42,11 @@ export default class LiveContent extends React.Component {
 
                   <div className="row">
                     <div className="col-xs-10 col-md-10 col-lg-10 pb2">
-                      <h2 style={textStyles}>${props.title}</h2>
+                      <h2 style={titleStyles} className="f3">${props.title}</h2>
                     </div>
 
                     <div className="col-xs-2 col-md-2 col-lg-2 pb2">
-                      <a style={textStyles} href="${props.link}" target="_blank">See more</a>
+                      <a style={titleStyles} href="${props.link}" target="_blank">See more</a>
                     </div>
                   </div>
 
@@ -56,7 +62,7 @@ export default class LiveContent extends React.Component {
 
   render() {
     return (
-      <Card elevation={10} className="mb5">
+      <Card elevation={10} className="mb4">
         <CardContent>
           {this._generateContentElement(this.props)}
         </CardContent>
