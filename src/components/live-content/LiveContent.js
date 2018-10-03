@@ -32,25 +32,29 @@ export default class LiveContent extends React.Component {
 
             // Render the UI element
             return (
-              <div className="row" style={{paddingTop: '8px'}}>
-
-                <div className="col-xs-3 col-md-3 col-lg-3">
-                  <img src="${props.image}"/>
+              <div className="pl2 pr2">
+                <div className="row pb3" style={{paddingTop: '8px'}}>
+                  <div className="col-10 center">
+                    <img src="${props.image}"/>
+                  </div>
                 </div>
 
-                <div className="col-xs-9 col-md-9 col-lg-9 pa3">
-
-                  <div className="row">
-                    <div className="col-xs-10 col-md-10 col-lg-10 pb2">
+                <div className="row pb1" style={{paddingTop: '8px'}}>
+                  <div className="col-12">
                       <h2 style={titleStyles} className="f3">${props.title}</h2>
-                    </div>
-
-                    <div className="col-xs-2 col-md-2 col-lg-2 pb2">
-                      <a style={titleStyles} href="${props.link}" target="_blank">See more</a>
-                    </div>
                   </div>
+                </div>
 
-                  <p style={textStyles}>${props.description}</p>
+                <div className="row pb1">
+                  <div className="col-12">
+                      <a style={titleStyles} href="${props.link}" target="_blank">See more</a>
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-12">
+                    <p style={textStyles}>${props.description}</p>
+                  </div>
                 </div>
               </div>
             )
