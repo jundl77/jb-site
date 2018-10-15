@@ -1,4 +1,4 @@
-FROM node:10-onbuild
+FROM node:9-onbuild
 
 RUN mv ./tools/ENV_VARS.js ./tools/ENV_VARS.temp.js
 RUN apt-get update
