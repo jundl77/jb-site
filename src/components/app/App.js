@@ -14,7 +14,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <div className="pt4 pa2" style={{minHeight: '95vh'}}>
+        <div className="pt4 pa2" style={{minHeight: '100vh'}}>
           <MuiTheme>
             <div>
               <div className="container">

@@ -34,7 +34,7 @@ export default class LiveContent extends React.Component {
             return (
               <div className="pl2 pr2">
                 <div className="row pb3" style={{paddingTop: '8px'}}>
-                  <div className="col-10 center">
+                  <div className="col-12 center">
                     <img src="${props.image}"/>
                   </div>
                 </div>

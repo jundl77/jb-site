@@ -1,26 +1,24 @@
-var webpack = require('webpack');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
-  entry: "./src/index.js",
+  mode: 'production',
+  entry: path.resolve(__dirname, "../src/index.js"),
   module: {
-    loaders: [
-      {test: /\.scss|\.sass|\.css$/, loaders: ["style", "css", "sass"], exclude: /node_modules/},
-      {test: /\.ttf$|\.otf$|\.eot$|\.woff$|\.woff2$/, loader: "url-loader?limit=100000"},
-      {test: /\.jpe?g$|\.png$/, loader: "file-loader"},
-      {test: /\.svg$/, loader: "svg-inline"},
-      {test: /load-image/, loader: 'imports?define=>false'},
-      {test: /\.json$/, loader: "json-loader"},
-      {test: /\.jsx?$/, exclude: /(node_modules)/, loader: 'babel-loader'}
+    rules: [
+      {test: /\.scss|\.sass|\.css$/, use: ["style-loader", "css-loader", "sass-loader"], exclude: /node_modules/},
+      {test: /\.ttf$|\.otf$|\.eot$|\.woff$|\.woff2$/, use: "url-loader?limit=100000"},
+      {test: /\.jpe?g$|\.png$/, use: "file-loader"},
+      {test: /\.svg$/, use: "svg-inline"},
+      {test: /load-image/, use: 'imports?define=>false'},
+      {test: /\.json$/, use: "json-loader"},
+      {test: /\.jsx?$/, exclude: /(node_modules)/, use: ['babel-loader', 'eslint-loader']}
     ]
   },
   output: {
-    path: "./build",
+    path: path.resolve(__dirname, "../build"),
     filename: "bundle.min.js"
-  },
-  alias: {
-    'react': 'preact-compat',
-    'react-dom': 'preact-compat'
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -29,8 +27,5 @@ module.exports = {
     new CopyWebpackPlugin([
       {from: 'static'}
     ]),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false})
-  ]
+  ],
 };

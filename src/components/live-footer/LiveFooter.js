@@ -23,9 +23,10 @@ export default class LiveFooter extends React.Component {
                       <div className="row">
                         <div className="col-12">
                           <p className="f6 dib pr2" style={styles}>
-                            No ewaks came to harm during the creation of this website
+                            Contact @
+                            <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
+                            julianbrendl@gmail.com</a>
                           </p>
-                          <i className="icon f6 dib ti-heart" style={{color: "#ff4850"}}/>
                         </div>
                       </div>
                     </div>

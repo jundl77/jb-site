@@ -85,6 +85,7 @@ export default class LiveComponent extends React.Component {
             </div>
           </LiveProvider>
           <ComponentEditor code={this.state.code}
+                           style={{backgroundColor: 'white !important'}}
                            hoverable={false}
                            anchor={this.state.anchor}
                            onChange={this._updateCode}
