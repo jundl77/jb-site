@@ -13,7 +13,7 @@ module.exports = {
       {test: /\.svg$/, use: "svg-inline"},
       {test: /load-image/, use: 'imports?define=>false'},
       {test: /\.json$/, use: "json-loader"},
-      {test: /\.jsx?$/, exclude: /(node_modules)/, use: ['babel-loader']}
+      {test: /\.jsx?$/, exclude: /(node_modules)/, use: ['babel-loader', 'eslint-loader']}
     ]
   },
   output: {
