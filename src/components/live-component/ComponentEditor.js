@@ -45,12 +45,17 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/xml/xml')
       require('codemirror/mode/javascript/javascript')
     }
+    
+    const tabStyle = {
+      width: '5rem',
+      outlineWidth: 0
+    }
 
     // Style differently depending on whether it is hoverable or not
     if (!this.props.hoverable) {
       return (
         <div>
-          <AppBar position="static" color="default">
+          <AppBar position="static" color="default" elevation={0} style={{backgroundColor: 'white'}}>
             <Toolbar>
               <Tabs
                 style={{display: 'inline-block'}}
@@ -58,9 +63,9 @@ export default class ComponentEditor extends React.Component {
                 indicatorColor='primary'
                 onChange={this._handleTabChange}
               >
-                <Tab label="React" style={{width: '5rem'}}/>
-                <Tab label="Haskell" style={{width: '5rem'}}/>
-                <Tab label="Rust" style={{width: '5rem'}}/>
+                <Tab label="React" style={tabStyle}/>
+                <Tab label="Haskell" style={tabStyle}/>
+                <Tab label="Rust" style={tabStyle}/>
               </Tabs>
             </Toolbar>
           </AppBar>
@@ -82,9 +87,9 @@ export default class ComponentEditor extends React.Component {
               indicatorColor='primary'
               onChange={this._handleTabChange}
             >
-              <Tab label="React" style={{width: '5rem'}}/>
-              <Tab label="Haskell" style={{width: '5rem'}}/>
-              <Tab label="Rust" style={{width: '5rem'}}/>
+              <Tab label="React" style={tabStyle}/>
+              <Tab label="Haskell" style={tabStyle}/>
+              <Tab label="Rust" style={tabStyle}/>
             </Tabs>
           </Toolbar>
         </AppBar>

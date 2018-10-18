@@ -27,19 +27,8 @@ export default class LiveComponent extends React.Component {
       })
     }
   }
-  _handlePopoverOpen = () => {
-    if (!this.state.visibleEditor) {
-      this.setState({visiblePopup: true})
-    }
-  }
   _handlePopoverClose = () => {
     this.setState({visiblePopup: false})
-  }
-  _showEditor = () => {
-    this.setState({
-      visibleEditor: true,
-      visiblePopup: false
-    })
   }
   _closeEditor = () => {
     this.setState({visibleEditor: false})
@@ -75,7 +64,7 @@ export default class LiveComponent extends React.Component {
     return (
       <div>
         <Card elevation={20}>
-          <LiveProvider style={{display: 'flex', backgroundColor: '#F5F5F5', borderBottom: '2px solid #2196F3'}}
+          <LiveProvider style={{display: 'flex'}}
                         code={this.state.code} mountStylesheet={false}>
             <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
                          style={previewStyles}
