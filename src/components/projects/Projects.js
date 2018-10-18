@@ -22,7 +22,7 @@ export default class Projects extends React.Component {
                 <div className="col-lg-6 col-10 center">
                   <LiveContent image="img/r1.jpg"
                                title="Exemplator"
-                               link="https://github.com/exemplator"
+                               link="https://exemplator.julianbrendl.com"
                                description="A search tool to easily and seamlessly find Java code samples."/>
                 </div>
                 <div className="col-lg-6 col-10 center">

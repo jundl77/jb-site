@@ -1,11 +1,21 @@
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
+
+const entryPath = path.resolve(__dirname, "../src/index.js");
+const outputPath = path.resolve(__dirname, "../dev");
+
+const cleanOptions = {
+  root: path.resolve(__dirname, "../"),
+  verbose: true,
+  dry: false
+}
 
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: path.resolve(__dirname, "../src/index.js"),
+  entry: entryPath,
   module: {
     rules: [
       {test: /\.scss|\.sass|\.css$/, use: ["style-loader", "css-loader", "sass-loader"], exclude: /node_modules/},
@@ -18,10 +28,11 @@ module.exports = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, "../dev"),
+    path: outputPath,
     filename: "bundle.min.js"
   },
   plugins: [
+    new CleanWebpackPlugin(outputPath, cleanOptions),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
