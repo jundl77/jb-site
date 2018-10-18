@@ -1,7 +1,7 @@
 import React from 'react'
 import App from '../app/App'
-import LiveContent from '../live-content/LiveContent'
-import LiveParagraph from '../live-pp/LivePP'
+import LiveContent from '../live-components/live-content/LiveContent'
+import LiveParagraph from '../live-components/live-pp/LivePP'
 
 export default class Projects extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import App from '../app/App'
-import VisibleLiveComponent from '../live-component/VisibleLiveComponent'
+import VisibleLiveComponent from '../live-components/VisibleLiveComponent'
 
 export default class Main extends React.Component {
 

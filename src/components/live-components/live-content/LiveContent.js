@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import LiveComponent from '../live-component/LiveComponent'
+import LiveComponent from '../LiveComponent'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 

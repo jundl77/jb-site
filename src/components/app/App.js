@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import MuiTheme from '../theme/MuiTheme'
-import LiveHero from '../live-hero/LiveHero'
-import LiveNavbar from '../live-navbar/LiveNavbar'
-import LiveFooter from '../live-footer/LiveFooter'
+import MuiTheme from './theme/MuiTheme'
+import LiveHero from '../live-components/live-hero/LiveHero'
+import LiveNavbar from '../live-components/live-navbar/LiveNavbar'
+import LiveFooter from '../live-components/live-footer/LiveFooter'
+import ErrorBar from './error-bar/ErrorBar'
 
 export default class App extends React.Component {
   static propTypes = {
@@ -25,6 +26,7 @@ export default class App extends React.Component {
             </div>
           </MuiTheme>
         </div>
+        <ErrorBar/>
         <LiveFooter/>
       </div>
     )

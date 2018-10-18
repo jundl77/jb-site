@@ -87,9 +87,9 @@ export default class ComponentEditor extends React.Component {
               indicatorColor='primary'
               onChange={this._handleTabChange}
             >
-              <Tab label="React" style={tabStyle}/>
-              <Tab label="Haskell" style={tabStyle}/>
-              <Tab label="Rust" style={tabStyle}/>
+              <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
+              <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
+              <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
             </Tabs>
           </Toolbar>
         </AppBar>

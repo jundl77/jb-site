@@ -1,5 +1,5 @@
 import React from 'react'
-import LiveComponent from '../live-component/LiveComponent'
+import LiveComponent from '../LiveComponent'
 
 export default class LiveFooter extends React.Component {
 

@@ -1,15 +1,14 @@
 import React from 'react'
+import LiveComponent from '../LiveComponent'
 import PropTypes from 'prop-types'
-import LiveComponent from '../live-component/LiveComponent'
 
-export default class LiveParagraph extends React.Component {
+export default class LiveHero extends React.Component {
 
   static propTypes = {
-    classes: PropTypes.string,
-    content: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired
   }
 
-  _generateParagraphElement = props => {
+  _generateHeroElement = content => {
     return (
       <LiveComponent previewStyles={{margin: 'auto'}} code={`
         class extends React.Component {
@@ -22,7 +21,7 @@ export default class LiveParagraph extends React.Component {
 
             // Render the UI element
             return (
-              <div style={styles} className="${props.classes}">${props.content}</div>
+              <h1 style={styles}>${content}</h1>
             )
           }
         }
@@ -32,8 +31,10 @@ export default class LiveParagraph extends React.Component {
 
   render() {
     return (
-      <div>
-        {this._generateParagraphElement(this.props)}
+      <div id="nav-bar-logo" className="row pt2 pl2 pr2 pb3">
+        <div className="col-md-10 col-xs-9 center">
+          {this._generateHeroElement(this.props.title)}
+        </div>
       </div>
     )
   }
