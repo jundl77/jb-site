@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="174px" height="35px" viewBox="0 0 174 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="213px" height="35px" viewBox="0 0 213 35" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
     <title>Artboard</title>
     <desc>Created with Sketch.</desc>
@@ -7,7 +7,7 @@
         <polygon id="path-1" points="0 25 36 25 36 0 0 0"></polygon>
     </defs>
     <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Haskell-Logo" transform="translate(0.000000, 5.000000)">
+        <g id="Haskell-Logo" transform="translate(20.000000, 5.000000)">
             <mask id="mask-2" fill="white">
                 <use xlink:href="#path-1"></use>
             </mask>
@@ -19,8 +19,8 @@
                 <polygon id="Shape" fill="#875288" points="24.7058824 11.4583333 21.8823529 7.29166667 36 7.29166667 36 11.4583333"></polygon>
             </g>
         </g>
-        <text id="Haskell" font-family="Hasklig-Regular, Hasklig" font-size="30" font-weight="normal" fill="#4A4A4A">
-            <tspan x="49" y="28">Haskell</tspan>
+        <text id="Haskell" font-family="Hasklig-Regular, Hasklig" font-size="30" font-weight="normal" fill="#000000">
+            <tspan x="69" y="28">Haskell</tspan>
         </text>
     </g>
 </svg>
