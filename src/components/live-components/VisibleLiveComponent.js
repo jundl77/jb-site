@@ -16,11 +16,13 @@ export default class VisibleLiveComponent extends LiveComponent {
       backgroundColor: color
     }
 
+    // Get the correct code to display
+    const code = this.state.code[this.state.tabValue]
+
     return (
       <div>
         <Card elevation={20}>
-          <LiveProvider style={{display: 'flex'}}
-                        code={this.state.code} mountStylesheet={false}>
+          <LiveProvider style={{display: 'flex'}} code={code} mountStylesheet={false}>
             <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
                          style={previewStyles}
                          onMouseLeave={this._handlePopoverClose}/>
@@ -28,11 +30,13 @@ export default class VisibleLiveComponent extends LiveComponent {
               <LiveError style={{display: 'none'}}/>
             </div>
           </LiveProvider>
-          <ComponentEditor code={this.state.code}
+          <ComponentEditor code={code}
+                           tab={this.state.tabValue}
                            style={{backgroundColor: 'white !important'}}
                            hoverable={false}
                            anchor={this.state.anchor}
                            onChange={this._updateCode}
+                           onTabChange={this._handleTabChange}
                            visible={true}
                            onClose={this._closeEditor}/>
         </Card>

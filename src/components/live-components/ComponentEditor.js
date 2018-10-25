@@ -13,10 +13,12 @@ export default class ComponentEditor extends React.Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
+    tab: PropTypes.number.isRequired,
     visible: PropTypes.bool.isRequired,
     hoverable: PropTypes.bool.isRequired,
     anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    onTabChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
   }
 
@@ -25,13 +27,8 @@ export default class ComponentEditor extends React.Component {
 
     this.state = {
       visible: props.visible,
-      tabValue: 0,
       editorDisplay: 'none'
     }
-  }
-
-  _handleTabChange = (event, tabValue) => {
-    this.setState({tabValue})
   }
 
   render() {
@@ -51,25 +48,29 @@ export default class ComponentEditor extends React.Component {
       outlineWidth: 0
     }
 
+    const tabs =
+      <Tabs
+        style={{display: 'inline-block'}}
+        value={this.props.tab}
+        indicatorColor='primary'
+        onChange={this.props.onTabChange}
+      >
+        <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
+      </Tabs>
+
     // Style differently depending on whether it is hoverable or not
     if (!this.props.hoverable) {
       return (
         <div>
           <AppBar position="static" color="default" elevation={0} style={{backgroundColor: 'white'}}>
-            <Toolbar>
-              <Tabs
-                style={{display: 'inline-block'}}
-                value={this.state.tabValue}
-                indicatorColor='primary'
-                onChange={this._handleTabChange}
-              >
-                <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
-                <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
-                <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
-              </Tabs>
-            </Toolbar>
+            <Toolbar>{tabs}</Toolbar>
           </AppBar>
-          <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
+          <CodeMirror value={this.props.code}
+                      onChange={this.props.onChange}
+                      options={options}
+                      autoCursor={false}/>
         </div>
       )
     }
@@ -81,16 +82,7 @@ export default class ComponentEditor extends React.Component {
             <Button color="inherit" onClick={this.props.onClose} aria-label="Menu" style={{display: 'inline-block'}}>
               <CloseIcon/>
             </Button>
-            <Tabs
-              style={{display: 'inline-block', backgroundColor: 'white !important'}}
-              value={this.state.tabValue}
-              indicatorColor='primary'
-              onChange={this._handleTabChange}
-            >
-              <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
-              <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
-              <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
-            </Tabs>
+            {tabs}
           </Toolbar>
         </AppBar>
         <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>

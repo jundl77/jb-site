@@ -22,6 +22,7 @@ export default class LiveComponent extends React.Component {
     this.liveError = React.createRef()
     this.state = {
       code: this._formatCodeString(this.props.code),
+      tabValue: 0,
       visibleEditor: false,
       visiblePopup: false,
       anchor: null
@@ -35,7 +36,7 @@ export default class LiveComponent extends React.Component {
     lines = lines.filter(line => line.trim().length > 0)
 
     const min = lines.reduce((len, str) => Math.min(re.exec(str)[0].length, len), 1000, lines)
-    return lines.map(line => line.replace(' '.repeat(min), ''), lines).join('\n')
+    return [lines.map(line => line.replace(' '.repeat(min), ''), lines).join('\n'), 'hi']
   }
 
   _handlePopoverOpenWithAnchor = event => {
@@ -60,7 +61,7 @@ export default class LiveComponent extends React.Component {
   _showEditor = () => {
     this.setState({
       visibleEditor: true,
-      visiblePopup: false
+      visiblePopup: false,
     })
   }
 
@@ -69,10 +70,16 @@ export default class LiveComponent extends React.Component {
   }
 
   _updateCode = (editor, data, value) => {
-    this.setState({code: value})
+    const code = this.state.code
+    code[this.state.tabValue] = value
+    this.setState({code: code})
   }
 
-  _errorCheck = () => {
+	_handleTabChange = (event, tabValue) => {
+		this.setState({tabValue: tabValue})
+	}
+
+	_errorCheck = () => {
     let color = 'transparent'
     if (this.liveError.current != null && this.liveError.current.children.length > 0) {
       color = '#F44336'
@@ -86,7 +93,7 @@ export default class LiveComponent extends React.Component {
 
   render() {
 
-    // check if there has been an error
+    // Check if there has been an error
     let color = this._errorCheck()
 
     const previewStyles = {
@@ -94,9 +101,12 @@ export default class LiveComponent extends React.Component {
       backgroundColor: color
     }
 
+    // Get the correct code to display
+    const code = this.state.code[this.state.tabValue]
+
     return (
       <div>
-        <LiveProvider style={{display: 'flex'}} code={this.state.code} mountStylesheet={false}>
+        <LiveProvider style={{display: 'flex'}} code={code} mountStylesheet={false}>
           <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
                        style={previewStyles}
                        onMouseLeave={this._handlePopoverClose}/>
@@ -118,9 +128,11 @@ export default class LiveComponent extends React.Component {
             </Grow>
           )}
         </Popper>
-        <HoverableComponentEditor code={this.state.code}
+        <HoverableComponentEditor code={code}
+                                  tab={this.state.tabValue}
                                   anchor={this.state.anchor}
                                   onChange={this._updateCode}
+                                  onTabChange={this._handleTabChange}
                                   visible={this.state.visibleEditor}
                                   onClose={this._closeEditor}/>
       </div>

@@ -7,9 +7,11 @@ export default class HoverableComponentEditor extends React.Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
+    tab: PropTypes.number.isRequired,
     visible: PropTypes.bool.isRequired,
     anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    onTabChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
   }
 
@@ -26,7 +28,9 @@ export default class HoverableComponentEditor extends React.Component {
         transformOrigin={{horizontal: 'left', vertical: 'top'}}
       >
         <ComponentEditor code={this.props.code}
+                         tab={this.props.tab}
                          hoverable={true}
+                         onTabChange={this.props.onTabChange}
                          visible={this.props.visible}
                          onChange={this.props.onChange}
                          onClose={this.props.onClose}/>
