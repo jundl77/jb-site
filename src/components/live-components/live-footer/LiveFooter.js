@@ -4,38 +4,65 @@ import LiveComponent from '../LiveComponent'
 export default class LiveFooter extends React.Component {
 
   _generateFooterElement = () => {
-    return (
-      <LiveComponent previewStyles={{margin: 'auto'}} code={`
-        class extends React.Component {
-          render() {
+    let reactCode = `
+      class extends React.Component {
+        render() {
 
-            // Define CSS styles for the UI element
-            const styles = {
-              fontFamily: 'Roboto Mono, monospace',
-              color: 'white'
-            }
+          // Define CSS styles for the UI element
+          const styles = {
+            fontFamily: 'Roboto Mono, monospace',
+            color: 'white'
+          }
 
-            // Render the UI element
-            return (
-              <footer className="footer pl3 pr3 pt2 pb2">
-                <section className="footer-section">
-                    <div className="footer-copy">
-                      <div className="row">
-                        <div className="col-12">
-                          <p className="f6 dib pr2" style={styles}>
-                            Contact @
-                            <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
-                            julianbrendl@gmail.com</a>
-                          </p>
-                        </div>
+          // Render the UI element
+          return (
+            <footer className="footer pl3 pr3 pt2 pb2">
+              <section className="footer-section">
+                  <div className="footer-copy">
+                    <div className="row">
+                      <div className="col-12">
+                        <p className="f6 dib pr2" style={styles}>
+                          Contact @
+                          <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
+                          julianbrendl@gmail.com</a>
+                        </p>
                       </div>
                     </div>
-                </section>
-              </footer>
-            )
-          }
+                  </div>
+              </section>
+            </footer>
+          )
         }
-      `}/>
+      }
+    `
+
+    let scalaCode = `
+      new ReactComponent {
+        def myName() = "Julian Brendl"
+
+        override def render(): Text.TypedTag[String] = {
+          div(
+            h1("Test"),
+            div(
+              p("My name is: " + myName()),
+              p("This is my second paragraph"),
+              p("This is my third paragraph")
+            )
+          )
+        }
+      }`
+
+    let haskellCode = ''
+
+    let rustCode = ''
+
+    return (
+      <LiveComponent previewStyles={{margin: 'auto'}} code={{
+        'react': reactCode,
+        'scala': scalaCode,
+        'haskell': haskellCode,
+        'rust': rustCode
+      }}/>
     )
   }
 

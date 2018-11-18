@@ -8,12 +8,13 @@ import Paper from '@material-ui/core/Paper'
 import Grow from '@material-ui/core/Grow'
 import CodeIcon from '@material-ui/icons/Code'
 import { showError, hideError } from "../../actions/errorAction"
+import CodeState from "../../util/codeState"
 
 export default class LiveComponent extends React.Component {
 
   static propTypes = {
     previewStyles: PropTypes.object,
-    code: PropTypes.string.isRequired
+    code: PropTypes.object.isRequired
   }
 
   constructor(props) {
@@ -21,22 +22,12 @@ export default class LiveComponent extends React.Component {
 
     this.liveError = React.createRef()
     this.state = {
-      code: this._formatCodeString(this.props.code),
+      codeState: new CodeState(props.code),
       tabValue: 0,
       visibleEditor: false,
       visiblePopup: false,
       anchor: null
     }
-  }
-
-  _formatCodeString = code => {
-    const re = new RegExp('^( *)')
-
-    let lines = code.split('\n')
-    lines = lines.filter(line => line.trim().length > 0)
-
-    const min = lines.reduce((len, str) => Math.min(re.exec(str)[0].length, len), 1000, lines)
-    return [lines.map(line => line.replace(' '.repeat(min), ''), lines).join('\n'), 'hi']
   }
 
   _handlePopoverOpenWithAnchor = event => {
@@ -70,9 +61,9 @@ export default class LiveComponent extends React.Component {
   }
 
   _updateCode = (editor, data, value) => {
-    const code = this.state.code
-    code[this.state.tabValue] = value
-    this.setState({code: code})
+    let code = this.state.codeState
+    code.set(this.state.tabValue, value)
+    this.setState({codeState: code})
   }
 
 	_handleTabChange = (event, tabValue) => {
@@ -101,12 +92,13 @@ export default class LiveComponent extends React.Component {
       backgroundColor: color
     }
 
-    // Get the correct code to display
-    const code = this.state.code[this.state.tabValue]
+    // Get the correct codeState to display
+    const raw = this.state.codeState.getRaw(this.state.tabValue)
+    const real = this.state.codeState.getReal(this.state.tabValue)
 
     return (
       <div>
-        <LiveProvider style={{display: 'flex'}} code={code} mountStylesheet={false}>
+        <LiveProvider style={{display: 'flex'}} code={real} mountStylesheet={false}>
           <LivePreview onMouseEnter={this._handlePopoverOpenWithAnchor}
                        style={previewStyles}
                        onMouseLeave={this._handlePopoverClose}/>
@@ -128,7 +120,7 @@ export default class LiveComponent extends React.Component {
             </Grow>
           )}
         </Popper>
-        <HoverableComponentEditor code={code}
+        <HoverableComponentEditor code={raw}
                                   tab={this.state.tabValue}
                                   anchor={this.state.anchor}
                                   onChange={this._updateCode}
