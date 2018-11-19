@@ -6,6 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Button from '@material-ui/core/Button'
+import Tooltip from '@material-ui/core/Tooltip'
 import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
 import CodeState from "../../util/codeState"
@@ -78,23 +79,32 @@ export default class ComponentEditor extends React.Component {
 
     const classes = "absolute bottom-1 z-max " + paddingRight
 
+    const langTitle = lang.replace(/^./, str => str.toUpperCase())
+    const serverStatusDescription = langTitle + " needs to be compiled. That is why your code will be sent to my server " +
+      "to run and hopefully return valid HTML. The text below tells you whether that server is currently online or not."
+    const buttonDescription =  langTitle + " needs to be compiled. If you press the button above, your code will " +
+      "be sent to my server to run and hopefully return valid HTML that will then be displayed."
+
     let actionMenu
     if (lang !== "react") {
       actionMenu =
         <div className={classes}>
-          <div className="mf f7 pb1 white tc">
-            <span className="v-mid pr1">Server:</span>
-            <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
-          </div>
-          <Button variant="contained" color="secondary" style={{textTransform: "none", color: "white", outlineWidth: 0}}>
-            <PlayIcon className="mr1" style={{color: "#4CAF50", fontSize: "28px"}}/>
-            <span className="mf">Run</span>
-          </Button>
+          <Tooltip title={serverStatusDescription} placement="top">
+            <div className="mf f7 pb1 white tc">
+              <span className="v-mid pr1">Server:</span>
+              <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
+            </div>
+          </Tooltip>
+          <Tooltip title={buttonDescription} placement="bottom">
+            <Button variant="contained" color="secondary" style={{textTransform: "none", color: "white", outlineWidth: 0}}>
+              <PlayIcon className="mr1" style={{color: "#4CAF50", fontSize: "28px"}}/>
+              <span className="mf">Run</span>
+            </Button>
+          </Tooltip>
         </div>
     } else {
       const styles = {
-        padding: "10px",
-        paddingTop: "8px",
+        padding: "10px 12px 12px",
         background: "#1d1e24",
         borderRadius: "5px",
         boxShadow: "rgba(0, 0, 0, 0.2) 0px 1px 5px 0px," +
@@ -102,13 +112,17 @@ export default class ComponentEditor extends React.Component {
                    "rgba(0, 0, 0, 0.12) 0px 3px 1px -2px"
       }
       const classes = "absolute bottom-1 z-max " + paddingRight
+      const liveUpdateDescription = `Any change you make will take immediate effect, no need to compile!`
+
       actionMenu =
-        <div className={classes}>
-          <div className="mf pb1 white tc" style={styles}>
-            <AccessTime className="v-mid mr1" style={{color: "#4CAF50", fontSize: "20px"}}/>
-            <span className="v-mid f6 pl1">Live</span>
+        <Tooltip title={liveUpdateDescription}>
+          <div className={classes}>
+            <div className="mf pb1 white tc" style={styles}>
+              <AccessTime className="v-mid mr1" style={{color: "#4CAF50", fontSize: "20px"}}/>
+              <span className="v-mid f6 pl1">Live</span>
+            </div>
           </div>
-        </div>
+        </Tooltip>
     }
 
     return actionMenu

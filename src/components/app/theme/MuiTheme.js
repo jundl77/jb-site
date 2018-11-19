@@ -30,6 +30,13 @@ export default class MuiTheme extends React.Component {
           root: {
             textTransform: 'initial',
           }
+        },
+        MuiTooltip: {
+          tooltip: {
+            fontSize: '13px',
+            backgroundColor: '#1d1e24',
+            fontFamily: 'Roboto Mono, monospace'
+          },
         }
       }
     })
