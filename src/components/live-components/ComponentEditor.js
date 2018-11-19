@@ -8,6 +8,8 @@ import Tab from '@material-ui/core/Tab'
 import Button from '@material-ui/core/Button'
 import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
+import CodeState from "../../util/codeState"
+import PlayIcon from '@material-ui/icons/PlayArrow'
 
 export default class ComponentEditor extends React.Component {
 
@@ -31,10 +33,20 @@ export default class ComponentEditor extends React.Component {
     }
   }
 
+  getMode = () => {
+    let lang = CodeState.GetLang(this.props.tab)
+
+    switch (lang) {
+      case 'scala':
+        return 'text/x-scala'
+      case 'react':
+        return 'javascript'
+    }
+  }
 
   render() {
     const options = {
-      mode: 'text/x-scala',
+      mode: this.getMode(),
       theme: 'one-dark',
       lineNumbers: true
     }
@@ -63,6 +75,26 @@ export default class ComponentEditor extends React.Component {
         <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
       </Tabs>
 
+    let lang = CodeState.GetLang(this.props.tab)
+
+    let actionMenu = ""
+    if (lang !== "react") {
+      let paddingRight = "right-1"
+      if (!this.props.hoverable) {
+        paddingRight = "right-2"
+      }
+
+      const classes = "absolute bottom-1 z-max " + paddingRight
+
+      actionMenu =
+        <div className={classes}>
+          <Button variant="contained" color="primary" style={{textTransform: "none"}}>
+            <PlayIcon className="mr1"/>
+            Run
+          </Button>
+        </div>
+    }
+
     // Style differently depending on whether it is hoverable or not
     if (!this.props.hoverable) {
       return (
@@ -74,6 +106,7 @@ export default class ComponentEditor extends React.Component {
                       onChange={this.props.onChange}
                       options={options}
                       autoCursor={false}/>
+          {actionMenu}
         </div>
       )
     }
@@ -89,6 +122,7 @@ export default class ComponentEditor extends React.Component {
           </Toolbar>
         </AppBar>
         <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
+        {actionMenu}
       </Card>
     )
   }

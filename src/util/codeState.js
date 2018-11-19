@@ -23,6 +23,8 @@ const _indexMapping = new TabIndexMapping()
 
 export default class CodeState {
 
+  static GetLang = index => _indexMapping.get(index)
+
   constructor(code) {
     Object.keys(code).forEach(key => code[key] = this._formatCodeString(code[key]))
     let reactCode = code['react']
@@ -68,9 +70,19 @@ export default class CodeState {
     const re = new RegExp('^( *)')
 
     let lines = code.split('\n')
-    lines = lines.filter(line => line.trim().length > 0)
 
-    const min = lines.reduce((len, str) => Math.min(re.exec(str)[0].length, len), 1000, lines)
+    // Remove empty lines at front and end
+    let start = 0
+    let end = lines.length - 1
+
+    while (start < end && lines[start].trim().length === 0) start++
+    while (end >= start && lines[end].trim().length === 0) end--
+    lines = lines.slice(start, end + 1)
+
+    // Remove extra spaces at front
+    const min = lines.filter(line => line.trim().length > 0)
+                     .reduce((len, str) => Math.min(re.exec(str)[0].length, len), 1000, lines)
+
     return lines.map(line => line.replace(' '.repeat(min), ''), lines).join('\n')
   }
 }
