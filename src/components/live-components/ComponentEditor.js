@@ -10,6 +10,9 @@ import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
 import CodeState from "../../util/codeState"
 import PlayIcon from '@material-ui/icons/PlayArrow'
+import CheckCircle from '@material-ui/icons/CheckCircle'
+import AccessTime from '@material-ui/icons/AccessTime'
+//import Error from '@material-ui/icons/Error'
 
 export default class ComponentEditor extends React.Component {
 
@@ -44,6 +47,73 @@ export default class ComponentEditor extends React.Component {
     }
   }
 
+  getTabs = () => {
+    const tabStyle = {
+      width: '5rem',
+      outlineWidth: 0
+    }
+
+    return (
+      <Tabs
+        style={{display: 'inline-block'}}
+        value={this.props.tab}
+        indicatorColor='primary'
+        onChange={this.props.onTabChange}
+      >
+        <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/scalal.svg" width="80px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
+      </Tabs>
+    )
+  }
+
+  getActionMenu = () => {
+    let lang = CodeState.GetLang(this.props.tab)
+
+    let paddingRight = "right-1"
+    if (!this.props.hoverable) {
+      paddingRight = "right-2"
+    }
+
+    const classes = "absolute bottom-1 z-max " + paddingRight
+
+    let actionMenu
+    if (lang !== "react") {
+      actionMenu =
+        <div className={classes}>
+          <div className="mf f7 pb1 white tc">
+            <span className="v-mid pr1">Server:</span>
+            <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
+          </div>
+          <Button variant="contained" color="secondary" style={{textTransform: "none", color: "white", outlineWidth: 0}}>
+            <PlayIcon className="mr1" style={{color: "#4CAF50", fontSize: "28px"}}/>
+            <span className="mf">Run</span>
+          </Button>
+        </div>
+    } else {
+      const styles = {
+        padding: "10px",
+        paddingTop: "8px",
+        background: "#1d1e24",
+        borderRadius: "5px",
+        boxShadow: "rgba(0, 0, 0, 0.2) 0px 1px 5px 0px," +
+                   "rgba(0, 0, 0, 0.14) 0px 2px 2px 0px," +
+                   "rgba(0, 0, 0, 0.12) 0px 3px 1px -2px"
+      }
+      const classes = "absolute bottom-1 z-max " + paddingRight
+      actionMenu =
+        <div className={classes}>
+          <div className="mf pb1 white tc" style={styles}>
+            <AccessTime className="v-mid mr1" style={{color: "#4CAF50", fontSize: "20px"}}/>
+            <span className="v-mid f6 pl1">Live</span>
+          </div>
+        </div>
+    }
+
+    return actionMenu
+  }
+
   render() {
     const options = {
       mode: this.getMode(),
@@ -57,56 +127,18 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/clike/clike')
     }
 
-    const tabStyle = {
-      width: '5rem',
-      outlineWidth: 0
-    }
-
-    const tabs =
-      <Tabs
-        style={{display: 'inline-block'}}
-        value={this.props.tab}
-        indicatorColor='primary'
-        onChange={this.props.onTabChange}
-      >
-        <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
-        <Tab icon={<img src="../img/scalal.svg" width="80px"/>} style={tabStyle}/>
-        <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
-        <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
-      </Tabs>
-
-    let lang = CodeState.GetLang(this.props.tab)
-
-    let actionMenu = ""
-    if (lang !== "react") {
-      let paddingRight = "right-1"
-      if (!this.props.hoverable) {
-        paddingRight = "right-2"
-      }
-
-      const classes = "absolute bottom-1 z-max " + paddingRight
-
-      actionMenu =
-        <div className={classes}>
-          <Button variant="contained" color="primary" style={{textTransform: "none"}}>
-            <PlayIcon className="mr1"/>
-            Run
-          </Button>
-        </div>
-    }
-
     // Style differently depending on whether it is hoverable or not
     if (!this.props.hoverable) {
       return (
         <div>
           <AppBar position="static" color="default" elevation={0} style={{backgroundColor: 'white'}}>
-            <Toolbar>{tabs}</Toolbar>
+            <Toolbar>{this.getTabs()}</Toolbar>
           </AppBar>
           <CodeMirror value={this.props.code}
                       onChange={this.props.onChange}
                       options={options}
                       autoCursor={false}/>
-          {actionMenu}
+          {this.getActionMenu()}
         </div>
       )
     }
@@ -118,11 +150,11 @@ export default class ComponentEditor extends React.Component {
             <Button color="inherit" onClick={this.props.onClose} aria-label="Menu" style={{display: 'inline-block'}}>
               <CloseIcon/>
             </Button>
-            {tabs}
+            {this.getTabs()}
           </Toolbar>
         </AppBar>
         <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
-        {actionMenu}
+        {this.getActionMenu()}
       </Card>
     )
   }

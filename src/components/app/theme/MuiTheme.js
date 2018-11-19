@@ -15,6 +15,9 @@ export default class MuiTheme extends React.Component {
       palette: {
         primary: {
           main: '#2196F3'
+        },
+        secondary: {
+          main: '#1d1e24'
         }
       },
       overrides: {
