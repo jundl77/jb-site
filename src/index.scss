@@ -2,6 +2,8 @@
 @import 'components/live-components/editor';
 @import '../node_modules/codemirror/lib/codemirror.css';
 @import '../node_modules/codemirror/theme/material.css';
+@import '../node_modules/codemirror/theme/ambiance.css';
+@import './components/app/theme/onedark.css';
 
 body {
   margin: 0;

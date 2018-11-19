@@ -31,16 +31,18 @@ export default class ComponentEditor extends React.Component {
     }
   }
 
+
   render() {
     const options = {
-      mode: 'javascript',
-      theme: 'material',
+      mode: 'text/x-scala',
+      theme: 'one-dark',
       lineNumbers: true
     }
 
     if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
       require('codemirror/mode/xml/xml')
       require('codemirror/mode/javascript/javascript')
+      require('codemirror/mode/clike/clike')
     }
 
     const tabStyle = {
