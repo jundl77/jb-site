@@ -63,7 +63,7 @@ export default class ComponentEditor extends React.Component {
       >
         <Tab icon={<img src="../img/reactl.svg" width="80px"/>} style={tabStyle}/>
         <Tab icon={<img src="../img/scalal.svg" width="80px"/>} style={tabStyle}/>
-        <Tab icon={<img src="../img/hsl.svg" width="100px"/>} style={tabStyle}/>
+        <Tab icon={<img src="../img/hsl.svg" width="110px"/>} style={tabStyle}/>
         <Tab icon={<img src="../img/rustl.svg" width="80px"/>} style={tabStyle}/>
       </Tabs>
     )
