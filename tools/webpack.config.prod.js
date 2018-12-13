@@ -15,6 +15,11 @@ const cleanOptions = {
 module.exports = {
   mode: 'production',
   entry: entryPath,
+  node: {
+    fs: 'empty',
+    tls: 'empty',
+    net: 'empty'
+  },
   module: {
     rules: [
       {test: /\.scss|\.sass|\.css$/, use: ["style-loader", "css-loader", "sass-loader"], exclude: /node_modules/},
