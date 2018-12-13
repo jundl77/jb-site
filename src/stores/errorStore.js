@@ -15,7 +15,7 @@ const ErrorStore = assign({}, BaseStore, {
   }
 })
 
-AppDispatcher.register(function (action) {
+AppDispatcher.register(action => {
   switch (action.actionType) {
     case ErrorConstants.SHOW_ERROR:
       ErrorStore.setMessage(action.message)

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import * as transpilationService from './services/transpilationService'
 
 // Import components
 import Main from './components/main/Main'
@@ -11,6 +12,9 @@ require('./index.scss')
 
 // Copy the index.html file
 require('file-loader?name=[name].[ext]!./index.html')
+
+// Check which servers are up every 60 seconds
+transpilationService.serverStatusChecks()
 
 ReactDOM.render(
   <BrowserRouter>

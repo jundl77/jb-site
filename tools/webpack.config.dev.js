@@ -23,7 +23,6 @@ module.exports = {
       {test: /\.jpe?g$|\.png$/, use: "file-loader"},
       {test: /\.svg$/, use: "svg-inline-loader"},
       {test: /load-image/, use: 'imports?define=>false'},
-      {test: /\.json$/, use: "json-loader"},
       {test: /\.jsx?$/, exclude: /(node_modules)/, use: ['babel-loader', 'eslint-loader']}
     ]
   },

@@ -11,9 +11,11 @@ import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
 import CodeState from "../../util/codeState"
 import PlayIcon from '@material-ui/icons/PlayArrow'
+// import CircularProgress from '@material-ui/core/CircularProgress'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import AccessTime from '@material-ui/icons/AccessTime'
-//import Error from '@material-ui/icons/Error'
+import Error from '@material-ui/icons/Error'
+import ServerStatusStore from '../../stores/serverStatusStore'
 
 export default class ComponentEditor extends React.Component {
 
@@ -85,6 +87,18 @@ export default class ComponentEditor extends React.Component {
     const buttonDescription =  langTitle + " needs to be compiled. If you press the button above, your code will " +
       "be sent to my server to run and hopefully return valid HTML that will then be displayed."
 
+    // if server is down, display action menu as disabled
+    let serverStatus = <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
+    let buttonDisabled = false
+    let buttonTextColor = 'white'
+    let buttonColor = '#4CAF50'
+    if (!ServerStatusStore.getStatus(CodeState.GetLang(this.props.tab))) {
+      serverStatus = <Error className="v-mid" style={{color: "#F44336", fontSize: "0.75rem"}}/>
+      buttonDisabled = true
+      buttonTextColor = '#9E9E9E'
+      buttonColor = '#9E9E9E'
+    }
+
     let actionMenu
     if (lang !== "react") {
       actionMenu =
@@ -92,12 +106,15 @@ export default class ComponentEditor extends React.Component {
           <Tooltip title={serverStatusDescription} placement="top">
             <div className="mf f7 pb1 white tc">
               <span className="v-mid pr1">Server:</span>
-              <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
+              {serverStatus}
             </div>
           </Tooltip>
           <Tooltip title={buttonDescription} placement="bottom">
-            <Button variant="contained" color="secondary" style={{textTransform: "none", color: "white", outlineWidth: 0}}>
-              <PlayIcon className="mr1" style={{color: "#4CAF50", fontSize: "28px"}}/>
+            <Button variant="contained"
+                    disabled={buttonDisabled}
+                    color="secondary"
+                    style={{textTransform: "none", color: buttonTextColor, outlineWidth: 0}}>
+              <PlayIcon className="mr1" style={{color: buttonColor, fontSize: "28px"}}/>
               <span className="mf">Run</span>
             </Button>
           </Tooltip>
