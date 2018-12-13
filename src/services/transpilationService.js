@@ -1,53 +1,57 @@
 import * as request from "request-promise"
 import * as serverStatus from "../actions/serverStatusAction"
+import constants from "../constants/transpilationConstants"
 
 
 export const serverStatusChecks = () => {
-    scalaStatusCheck()
+    _serverStatusCheck('scala')
 
-    // call every 60 seconds
-    setTimeout(serverStatusChecks, 60)
+    // call every 5 seconds
+    setTimeout(serverStatusChecks, 5000)
 }
 
-const scalaStatusCheck = () => {
+const _serverStatusCheck = server => {
   const requestParams = {
     method: 'GET',
-    uri: 'http://julianbrendl.com:3001/status',
+    uri: constants.CHECK_STATUS_URL_FUNC(server),
   }
 
   request(requestParams)
-    .then(() => {
-      serverStatus.checkServerStatus('scala', true)
+    .then(response => {
+      if (response === '200')
+        serverStatus.updateServerStatus(server, true)
+      else
+        serverStatus.updateServerStatus(server, false)
     })
     .catch(() => {
-      serverStatus.checkServerStatus('scala', false)
+      serverStatus.updateServerStatus(server, false)
     })
 }
 
-// const transpileFromScala = code => {
-//
-// 	// Define request parameters
-// 	const requestParams = {
-// 		method: 'POST',
-//         uri: 'http://julianbrendl.com:3001/transpile',
-// 		body: {
-// 			codeState: code
-// 		},
-// 		json: true // Automatically stringifies the body to JSON
-// 	}
-//
-// 	request(requestParams)
-// 		.then(response => {
-// // eslint-disable-next-line no-console
-// 			console.log(response)
-// 		})
-// 		.catch(err => {
-// // eslint-disable-next-line no-console
-// 			console.log(err)
-// 		})
-//
-// 	return code
-// }
+export const transpileFromScala = code => {
+
+	// Define request parameters
+	const requestParams = {
+		method: 'POST',
+      uri: constants.TRANSPILE_URL_FUNC('scala'),
+		body: {
+			codeState: code
+		},
+		json: true // Automatically stringifies the body to JSON
+	}
+
+	request(requestParams)
+		.then(response => {
+// eslint-disable-next-line no-console
+			console.log(response)
+		})
+		.catch(err => {
+// eslint-disable-next-line no-console
+			console.log(err)
+		})
+
+	return code
+}
 
 // let code = `
 // new ReactComponent {

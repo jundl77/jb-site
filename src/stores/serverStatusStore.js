@@ -1,6 +1,6 @@
 import AppDispatcher from "../dispatchers/appDispatcher"
 import BaseStore from "./baseStore"
-import ServerStatusConstants from "../constants/serverStatusConstants"
+import ServerStatusConstants from "../constants/transpilationConstants"
 import assign from "object-assign"
 import * as Immutable from 'immutable'
 
@@ -17,7 +17,7 @@ const ServerStatusStore = assign({}, BaseStore, {
 
 AppDispatcher.register(action => {
     switch (action.actionType) {
-        case ServerStatusConstants.CHECK_STATUS:
+        case ServerStatusConstants.UPDATE_STATUS:
             ServerStatusStore.setStatus(action.server, action.status)
             ServerStatusStore.emitChange()
             break

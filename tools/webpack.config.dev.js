@@ -15,6 +15,11 @@ const cleanOptions = {
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
+  node: {
+    fs: 'empty',
+    tls: 'empty',
+    net: 'empty'
+  },
   entry: entryPath,
   module: {
     rules: [

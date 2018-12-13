@@ -1,9 +1,9 @@
 import AppDispatcher from "../dispatchers/appDispatcher"
-import ServerStatusConstants from "../constants/serverStatusConstants"
+import TranspilationConstants from "../constants/transpilationConstants"
 
-export const checkServerStatus = (server, status) => {
+export const updateServerStatus = (server, status) => {
     AppDispatcher.dispatch({
-        actionType: ServerStatusConstants.SHOW_ERROR,
+        actionType: TranspilationConstants.UPDATE_STATUS,
         server: server,
         status: status
     })

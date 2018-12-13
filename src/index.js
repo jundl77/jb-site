@@ -13,7 +13,7 @@ require('./index.scss')
 // Copy the index.html file
 require('file-loader?name=[name].[ext]!./index.html')
 
-// Check which servers are up every 60 seconds
+// Check which servers are up every 5 seconds
 transpilationService.serverStatusChecks()
 
 ReactDOM.render(

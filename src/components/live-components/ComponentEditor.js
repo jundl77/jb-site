@@ -39,7 +39,19 @@ export default class ComponentEditor extends React.Component {
     }
   }
 
-  getMode = () => {
+  componentDidMount() {
+    ServerStatusStore.addChangeListener(this._reRender)
+  }
+
+  componentWillUnmount() {
+    ServerStatusStore.removeChangeListener(this._reRender)
+  }
+
+  _reRender = () => {
+    this.setState({state: this.state})
+  }
+
+  _getMode = () => {
     let lang = CodeState.GetLang(this.props.tab)
 
     switch (lang) {
@@ -50,7 +62,7 @@ export default class ComponentEditor extends React.Component {
     }
   }
 
-  getTabs = () => {
+  _getTabs = () => {
     const tabStyle = {
       width: '5rem',
       outlineWidth: 0
@@ -71,7 +83,7 @@ export default class ComponentEditor extends React.Component {
     )
   }
 
-  getActionMenu = () => {
+  _getActionMenu = () => {
     let lang = CodeState.GetLang(this.props.tab)
 
     let paddingRight = "right-1"
@@ -147,7 +159,7 @@ export default class ComponentEditor extends React.Component {
 
   render() {
     const options = {
-      mode: this.getMode(),
+      mode: this._getMode(),
       theme: 'one-dark',
       lineNumbers: true
     }
@@ -163,13 +175,13 @@ export default class ComponentEditor extends React.Component {
       return (
         <div>
           <AppBar position="static" color="default" elevation={0} style={{backgroundColor: 'white'}}>
-            <Toolbar>{this.getTabs()}</Toolbar>
+            <Toolbar>{this._getTabs()}</Toolbar>
           </AppBar>
           <CodeMirror value={this.props.code}
                       onChange={this.props.onChange}
                       options={options}
                       autoCursor={false}/>
-          {this.getActionMenu()}
+          {this._getActionMenu()}
         </div>
       )
     }
@@ -181,11 +193,11 @@ export default class ComponentEditor extends React.Component {
             <Button color="inherit" onClick={this.props.onClose} aria-label="Menu" style={{display: 'inline-block'}}>
               <CloseIcon/>
             </Button>
-            {this.getTabs()}
+            {this._getTabs()}
           </Toolbar>
         </AppBar>
         <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
-        {this.getActionMenu()}
+        {this._getActionMenu()}
       </Card>
     )
   }
