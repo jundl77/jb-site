@@ -15,7 +15,7 @@ import PlayIcon from '@material-ui/icons/PlayArrow'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import AccessTime from '@material-ui/icons/AccessTime'
 import Error from '@material-ui/icons/Error'
-import ServerStatusStore from '../../stores/serverStatusStore'
+import TranspilationStore from '../../stores/transpilationStore'
 
 export default class ComponentEditor extends React.Component {
 
@@ -40,11 +40,11 @@ export default class ComponentEditor extends React.Component {
   }
 
   componentDidMount() {
-    ServerStatusStore.addChangeListener(this._reRender)
+    TranspilationStore.addChangeListener(this._reRender)
   }
 
   componentWillUnmount() {
-    ServerStatusStore.removeChangeListener(this._reRender)
+    TranspilationStore.removeChangeListener(this._reRender)
   }
 
   _reRender = () => {
@@ -104,7 +104,7 @@ export default class ComponentEditor extends React.Component {
     let buttonDisabled = false
     let buttonTextColor = 'white'
     let buttonColor = '#4CAF50'
-    if (!ServerStatusStore.getStatus(CodeState.GetLang(this.props.tab))) {
+    if (!CodeState.CanTranspile(this.props.tab)) {
       serverStatus = <Error className="v-mid" style={{color: "#F44336", fontSize: "0.75rem"}}/>
       buttonDisabled = true
       buttonTextColor = '#9E9E9E'

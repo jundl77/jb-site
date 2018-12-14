@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable'
+import TranspilationStore from '../stores/transpilationStore'
 
 const TabIndexMapping = Immutable.Record({
   0: 'react',
@@ -24,6 +25,7 @@ const _indexMapping = new TabIndexMapping()
 export default class CodeState {
 
   static GetLang = index => _indexMapping.get(index)
+  static CanTranspile = index => TranspilationStore.getStatus(CodeState.GetLang(index))
 
   constructor(code) {
     Object.keys(code).forEach(key => code[key] = this._formatCodeString(code[key]))
@@ -54,16 +56,14 @@ export default class CodeState {
     this.codeRecord = this.codeRecord.set(lang, langRecord)
   }
 
-  transpile = (index) => {
-    let code = this.get(index)
-    this.set(index, code)
-  }
+  transpile = index => {
+    let code = this.getRaw(index)
 
-  canTranspile = index => {
-    if (index === 1)
-      return true
-
-    return false
+    // set real code
+    let lang = _indexMapping.get(index)
+    let langRecord = this.codeRecord.get(lang)
+    langRecord = langRecord.set('real', code)
+    this.codeRecord = this.codeRecord.set(lang, langRecord)
   }
 
   _formatCodeString = code => {

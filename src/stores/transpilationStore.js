@@ -6,11 +6,13 @@ import * as Immutable from 'immutable'
 
 let _statusStore = Immutable.Map()
 
-const ServerStatusStore = assign({}, BaseStore, {
+const TranspilationStore = assign({}, BaseStore, {
     setStatus(server, status) {
         _statusStore = _statusStore.set(server, status)
     },
     getStatus(server) {
+        if (!_statusStore.has(server))
+            return false
         return _statusStore.get(server)
     }
 })
@@ -18,12 +20,12 @@ const ServerStatusStore = assign({}, BaseStore, {
 AppDispatcher.register(action => {
     switch (action.actionType) {
         case ServerStatusConstants.UPDATE_STATUS:
-            ServerStatusStore.setStatus(action.server, action.status)
-            ServerStatusStore.emitChange()
+            TranspilationStore.setStatus(action.server, action.status)
+            TranspilationStore.emitChange()
             break
         default:
-        // no op
+          // no op
     }
 })
 
-export default ServerStatusStore
+export default TranspilationStore
