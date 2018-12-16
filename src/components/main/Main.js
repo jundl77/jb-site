@@ -2,6 +2,8 @@ import React from 'react'
 import App from '../app/App'
 import VisibleLiveComponent from '../live-components/VisibleLiveComponent'
 
+let email = "julianbrendl@gmail.com"
+
 let reactCode =`
 class extends React.Component {
   render() {
@@ -21,9 +23,9 @@ class extends React.Component {
           <strong>Hover over any element on this website </strong>
           (except for this one) for a little surprise.
         </div>
+        
         <div>
-            Shoot me an email at <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
-            julianbrendl@gmail.com</a> to contact me.
+            Shoot me an email at <a style={{color: '#408EE0'}}href="mailto:${email}">${email}</a> to contact me.
         </div>
       </div>
     )
@@ -31,20 +33,31 @@ class extends React.Component {
 }
 `
 let scalaCode = `
-new ReactComponent {
-  def myName() = "Julian Brendl"
+  new ReactComponent {
+    // Define CSS styles for the UI element
+    def styles() = "font-family: Roboto Mono, monospace; padding: 2rem"
 
-  override def render(): Text.TypedTag[String] = {
-    div(
-      h1("Test"),
-      div(
-        p("My name is: " + myName()),
-        p("This is my second paragraph"),
-        p("This is my third paragraph")
+    // Render the UI element
+    override def render(): Text.TypedTag[String] = {
+    
+      // Render introduction
+      div(style := styles()) (
+        h1(\`class\` := "pb3")("Hi!"),
+        div(\`class\` := "pb3")("I'm Julian, and I am a comp-sci student in Germany."),
+        div(\`class\` := "pb3")(
+          strong("Hover over any element on this website"),
+          " (except for this one) for a little surprise."
+        ),
+        
+        // Render contact section
+        div()(
+          "Shoot me an email at ",
+          a(style := "color: #408EE0", href := "mailto:${email}")("${email}"),
+          " to contact me."
+        )
       )
-    )
+    }
   }
-}
 `
 
 let haskellCode = ''

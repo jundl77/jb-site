@@ -1,6 +1,7 @@
 import * as Immutable from 'immutable'
 import * as transpileService from '../services/transpilationService'
 import TranspilationStore from '../stores/transpilationStore'
+import convertToJsx from 'html-to-jsx'
 
 const TabIndexMapping = Immutable.Record({
   0: 'react',
@@ -70,7 +71,7 @@ export default class CodeState {
     return transpileService.transpile(code, lang)
       .then(response => {
         let langRecord = this.codeRecord.get(lang)
-        langRecord = langRecord.set('real', response)
+        langRecord = langRecord.set('real', convertToJsx(response))
         langRecord = langRecord.set('error', null)
         this.codeRecord = this.codeRecord.set(lang, langRecord)
         return this

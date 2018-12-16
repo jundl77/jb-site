@@ -212,7 +212,10 @@ export default class ComponentEditor extends React.Component {
       <Card elevation={3}>
         <AppBar position="static" color="default" root={{backgroundColor: 'white'}} elevation={0}>
           <Toolbar>
-            <Button color="inherit" onClick={this.props.onClose} aria-label="Menu" style={{display: 'inline-block'}}>
+            <Button color="inherit"
+                    onClick={this.props.onClose}
+                    aria-label="Menu"
+                    style={{display: 'inline-block', outlineWidth: 0}}>
               <CloseIcon/>
             </Button>
             {this._getTabs()}

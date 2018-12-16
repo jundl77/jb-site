@@ -4,9 +4,8 @@ import {LiveError, LivePreview, LiveProvider} from 'react-live'
 import HoverableComponentEditor from './HoverableComponentEditor'
 import Button from '@material-ui/core/Button'
 import Popper from '@material-ui/core/Popper'
-import Paper from '@material-ui/core/Paper'
 import Grow from '@material-ui/core/Grow'
-import CodeIcon from '@material-ui/icons/Code'
+import CodeIcon from '@material-ui/icons/Edit'
 import { showError, hideError } from "../../actions/errorAction"
 import CodeState from "../../util/codeState"
 
@@ -120,6 +119,16 @@ export default class LiveComponent extends React.Component {
     const raw = this.state.codeState.getRaw(this.state.tabValue)
     const real = this.state.codeState.getReal(this.state.tabValue)
 
+    const codeButtonStyles = {
+      padding: "7.5px 9px 9px",
+      background: "#1d1e24",
+      borderRadius: "5px",
+      outlineWidth: 0,
+      boxShadow: "rgba(0, 0, 0, 0.2) 0px 1px 5px 0px," +
+        "rgba(0, 0, 0, 0.14) 0px 2px 2px 0px," +
+        "rgba(0, 0, 0, 0.12) 0px 3px 1px -2px"
+    }
+
     return (
       <div>
         <LiveProvider style={{display: 'flex'}} code={real} mountStylesheet={false}>
@@ -131,16 +140,17 @@ export default class LiveComponent extends React.Component {
           </div>
         </LiveProvider>
         <Popper placement="bottom-start" open={this.state.visiblePopup} anchorEl={this.state.anchor} transition>
+          {/* eslint-disable-next-line */}
           {({TransitionProps}) => (
             <Grow {...TransitionProps} timeout={150}>
-              <Paper>
-                <Button size="small"
-                        onClick={this._showEditor}
-                        onMouseEnter={this._handlePopoverOpen}
-                        onMouseLeave={this._handlePopoverClose}>
-                  <CodeIcon/>
-                </Button>
-              </Paper>
+              <Button size="small"
+                      style={codeButtonStyles}
+                      onClick={this._showEditor}
+                      onMouseEnter={this._handlePopoverOpen}
+                      onMouseLeave={this._handlePopoverClose}>
+                <CodeIcon style={{color: "#2196F3", fontSize: "20px"}}/>
+                <span className="pl1 f6 ttc mf white">Edit</span>
+              </Button>
             </Grow>
           )}
         </Popper>

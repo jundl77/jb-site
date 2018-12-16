@@ -28,19 +28,15 @@ export default class LiveHero extends React.Component {
 
     let scalaCode = `
       new ReactComponent {
-        def myName() = "Julian Brendl"
+        // Define CSS styles for the UI element
+        def styles() = "font-family: Roboto Mono, monospace"
 
+        // Render the UI element
         override def render(): Text.TypedTag[String] = {
-          div(
-            h1("Test"),
-            div(
-              p("My name is: " + myName()),
-              p("This is my second paragraph"),
-              p("This is my third paragraph")
-            )
-          )
+          h1(style := styles())("${content}")
         }
-      }`
+      }
+    `
 
     let haskellCode = ''
 
