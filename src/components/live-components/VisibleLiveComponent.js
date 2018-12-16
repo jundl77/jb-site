@@ -37,6 +37,7 @@ export default class VisibleLiveComponent extends LiveComponent {
                            hoverable={false}
                            anchor={this.state.anchor}
                            onChange={this._updateCode}
+                           onTranspile={this._transpile}
                            onTabChange={this._handleTabChange}
                            visible={true}
                            onClose={this._closeEditor}/>

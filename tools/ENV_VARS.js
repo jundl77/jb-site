@@ -7,7 +7,7 @@ if (process.env.NODE_ENV !== "production" || !isProdUrl(SERVER_DOMAIN)) {
   console.log("Dev variables chosen")
   ENV_VARS = {
     SERVER_STATUS_URL_FUNC: (server => "http://localhost:3001/status"),
-    SERVER_TRANSPILATION_URL_FUNC: (server => "http://localhost:3001/status")
+    SERVER_TRANSPILATION_URL_FUNC: (server => "http://localhost:3001/transpile")
   }
 } else {
   ENV_VARS = {

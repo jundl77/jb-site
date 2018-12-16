@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar'
 import CloseIcon from '@material-ui/icons/Close'
 import CodeState from "../../util/codeState"
 import PlayIcon from '@material-ui/icons/PlayArrow'
-// import CircularProgress from '@material-ui/core/CircularProgress'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import CheckCircle from '@material-ui/icons/CheckCircle'
 import AccessTime from '@material-ui/icons/AccessTime'
 import Error from '@material-ui/icons/Error'
@@ -26,6 +26,7 @@ export default class ComponentEditor extends React.Component {
     hoverable: PropTypes.bool.isRequired,
     anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    onTranspile: PropTypes.func.isRequired,
     onTabChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
   }
@@ -35,7 +36,8 @@ export default class ComponentEditor extends React.Component {
 
     this.state = {
       visible: props.visible,
-      editorDisplay: 'none'
+      editorDisplay: 'none',
+      isTranspiling: false
     }
   }
 
@@ -83,6 +85,19 @@ export default class ComponentEditor extends React.Component {
     )
   }
 
+  _handleTranspile = () => {
+    this.setState({
+      isTranspiling: true
+    })
+
+    this.props.onTranspile()
+      .then(() => {
+        this.setState({
+          isTranspiling: false
+        })
+      })
+  }
+
   _getActionMenu = () => {
     let lang = CodeState.GetLang(this.props.tab)
 
@@ -95,9 +110,8 @@ export default class ComponentEditor extends React.Component {
 
     const langTitle = lang.replace(/^./, str => str.toUpperCase())
     const serverStatusDescription = langTitle + " needs to be compiled. That is why your code will be sent to my server " +
-      "to run and hopefully return valid HTML. The text below tells you whether that server is currently online or not."
-    const buttonDescription =  langTitle + " needs to be compiled. If you press the button above, your code will " +
-      "be sent to my server to run and hopefully return valid HTML that will then be displayed."
+      "to run and hopefully return valid HTML if you press the button below. The text above the button tells you whether " +
+      "that server is currently online or not (if it is not, you cannot press the button)."
 
     // if server is down, display action menu as disabled
     let serverStatus = <CheckCircle className="v-mid" style={{color: "#4CAF50", fontSize: "0.75rem"}}/>
@@ -111,6 +125,15 @@ export default class ComponentEditor extends React.Component {
       buttonColor = '#9E9E9E'
     }
 
+    let actionElem = <PlayIcon className="mr1" style={{color: buttonColor, fontSize: "28px"}}/>
+    if (this.state.isTranspiling) {
+      buttonDisabled = true
+      actionElem = <CircularProgress className="mr2" style={{marginTop: "0.125rem", marginBottom: "0.125rem"}}
+                                     color="primary"
+                                     size={23}
+                                     thickness={4}/>
+    }
+
     let actionMenu
     if (lang !== "react") {
       actionMenu =
@@ -121,15 +144,14 @@ export default class ComponentEditor extends React.Component {
               {serverStatus}
             </div>
           </Tooltip>
-          <Tooltip title={buttonDescription} placement="bottom">
-            <Button variant="contained"
-                    disabled={buttonDisabled}
-                    color="secondary"
-                    style={{textTransform: "none", color: buttonTextColor, outlineWidth: 0}}>
-              <PlayIcon className="mr1" style={{color: buttonColor, fontSize: "28px"}}/>
-              <span className="mf">Run</span>
-            </Button>
-          </Tooltip>
+          <Button variant="contained"
+                  disabled={buttonDisabled}
+                  color="secondary"
+                  onClick={this._handleTranspile}
+                  style={{textTransform: "none", color: buttonTextColor, outlineWidth: 0}}>
+            {actionElem}
+            <span className="mf">Run</span>
+          </Button>
         </div>
     } else {
       const styles = {

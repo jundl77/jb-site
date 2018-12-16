@@ -1,4 +1,5 @@
 import * as Immutable from 'immutable'
+import * as transpileService from '../services/transpilationService'
 import TranspilationStore from '../stores/transpilationStore'
 
 const TabIndexMapping = Immutable.Record({
@@ -10,7 +11,8 @@ const TabIndexMapping = Immutable.Record({
 
 const LanguageRecord = Immutable.Record({
   raw: '',
-  real: ''
+  real: '',
+  error: null
 })
 
 const CodeRecord = Immutable.Record({
@@ -44,6 +46,11 @@ export default class CodeState {
     return this.codeRecord.get(lang).get('real')
   }
 
+  getError = index => {
+    let lang = _indexMapping.get(index)
+    return this.codeRecord.get(lang).get('error')
+  }
+
   set = (index, code) => {
     let lang = _indexMapping.get(index)
     let langRecord = this.codeRecord.get(lang)
@@ -58,12 +65,22 @@ export default class CodeState {
 
   transpile = index => {
     let code = this.getRaw(index)
-
-    // set real code
     let lang = _indexMapping.get(index)
-    let langRecord = this.codeRecord.get(lang)
-    langRecord = langRecord.set('real', code)
-    this.codeRecord = this.codeRecord.set(lang, langRecord)
+
+    return transpileService.transpile(code, lang)
+      .then(response => {
+        let langRecord = this.codeRecord.get(lang)
+        langRecord = langRecord.set('real', response)
+        langRecord = langRecord.set('error', null)
+        this.codeRecord = this.codeRecord.set(lang, langRecord)
+        return this
+      })
+      .catch(error => {
+        let langRecord = this.codeRecord.get(lang)
+        langRecord = langRecord.set('error', error.message)
+        this.codeRecord = this.codeRecord.set(lang, langRecord)
+        return this
+      })
   }
 
   _formatCodeString = code => {

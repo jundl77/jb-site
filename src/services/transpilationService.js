@@ -14,23 +14,28 @@ export const transpile = (code, lang) => {
   const requestParams = {
     method: 'POST',
     uri: constants.TRANSPILE_URL_FUNC(lang),
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     body: {
-      codeState: code
+      code: code
     },
     json: true // Automatically stringifies the body to JSON
   }
 
-  request(requestParams)
+  return request(requestParams)
     .then(response => {
-// eslint-disable-next-line no-console
-      console.log(response)
+      if (_checkHTML(response))
+        return response
+      else
+        throw new Error("Invalid HTML received from server.")
     })
-    .catch(err => {
-// eslint-disable-next-line no-console
-      console.log(err)
-    })
+}
 
-  return code
+const _checkHTML = html => {
+  const doc = document.createElement('div')
+  doc.innerHTML = html
+  return doc.innerHTML === html
 }
 
 const _serverStatusCheck = server => {

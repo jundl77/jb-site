@@ -66,15 +66,39 @@ export default class LiveComponent extends React.Component {
     this.setState({codeState: code})
   }
 
+  _transpile = () => {
+    return this.state.codeState.transpile(this.state.tabValue)
+      .then(codeState => {
+        this.setState({
+          codeState: codeState
+        })
+        return true
+      })
+  }
+
 	_handleTabChange = (event, tabValue) => {
 		this.setState({tabValue: tabValue})
 	}
 
 	_errorCheck = () => {
+    let lang = CodeState.GetLang(this.state.tabValue)
+
     let color = 'transparent'
-    if (this.liveError.current != null && this.liveError.current.children.length > 0) {
+    if (lang === 'react') {
+      if (this.liveError.current != null && this.liveError.current.children.length > 0) {
+        color = '#F44336'
+        showError(this.liveError.current.children[0].innerText)
+      } else {
+        hideError()
+      }
+
+      return color
+    }
+
+    let error = this.state.codeState.getError(this.state.tabValue)
+    if (error != null) {
       color = '#F44336'
-      showError(this.liveError.current.children[0].innerText)
+      showError(error)
     } else {
       hideError()
     }
@@ -124,6 +148,7 @@ export default class LiveComponent extends React.Component {
                                   tab={this.state.tabValue}
                                   anchor={this.state.anchor}
                                   onChange={this._updateCode}
+                                  onTranspile={this._transpile}
                                   onTabChange={this._handleTabChange}
                                   visible={this.state.visibleEditor}
                                   onClose={this._closeEditor}/>

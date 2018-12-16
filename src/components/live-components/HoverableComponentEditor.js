@@ -11,6 +11,7 @@ export default class HoverableComponentEditor extends React.Component {
     visible: PropTypes.bool.isRequired,
     anchor: PropTypes.object,
     onChange: PropTypes.func.isRequired,
+    onTranspile: PropTypes.func.isRequired,
     onTabChange: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
   }
@@ -32,6 +33,7 @@ export default class HoverableComponentEditor extends React.Component {
                          hoverable={true}
                          onTabChange={this.props.onTabChange}
                          visible={this.props.visible}
+                         onTranspile={this.props.onTranspile}
                          onChange={this.props.onChange}
                          onClose={this.props.onClose}/>
       </Popover>
