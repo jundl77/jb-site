@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button'
 import Popper from '@material-ui/core/Popper'
 import Grow from '@material-ui/core/Grow'
 import CodeIcon from '@material-ui/icons/Edit'
-import { showError, hideError } from "../../actions/errorAction"
+import {hideError, showError} from "../../actions/errorAction"
 import CodeState from "../../util/codeState"
 
 export default class LiveComponent extends React.Component {
@@ -75,11 +75,11 @@ export default class LiveComponent extends React.Component {
       })
   }
 
-	_handleTabChange = (event, tabValue) => {
-		this.setState({tabValue: tabValue})
-	}
+  _handleTabChange = (event, tabValue) => {
+    this.setState({tabValue: tabValue})
+  }
 
-	_errorCheck = () => {
+  _errorCheck = () => {
     let lang = CodeState.GetLang(this.state.tabValue)
 
     let color = 'transparent'

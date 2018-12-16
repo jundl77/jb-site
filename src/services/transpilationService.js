@@ -4,19 +4,16 @@ import constants from "../constants/transpilationConstants"
 
 
 export const serverStatusChecks = () => {
-    _serverStatusCheck('scala')
+  _serverStatusCheck('scala')
 
-    // call every 5 seconds
-    setTimeout(serverStatusChecks, 5000)
+  // call every 5 seconds
+  setTimeout(serverStatusChecks, 5000)
 }
 
 export const transpile = (code, lang) => {
   const requestParams = {
     method: 'POST',
     uri: constants.TRANSPILE_URL_FUNC(lang),
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
     body: {
       code: code
     },

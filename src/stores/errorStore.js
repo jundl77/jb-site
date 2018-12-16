@@ -26,7 +26,7 @@ AppDispatcher.register(action => {
       ErrorStore.emitChange()
       break
     default:
-      // no op
+    // no op
   }
 })
 

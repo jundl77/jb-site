@@ -55,7 +55,8 @@ export default class LiveNavbar extends React.Component {
           <li style={{marginLeft: 0}}>{this._generateNavbarElement('/', '// Me')}</li>
           <li>{this._generateNavbarElement('projects', '// Projects')}</li>
           <li>{this._generateNavbarElement('https://github.com/jundl77', '// GitHub')}</li>
-          <li style={{marginRight: 0}}>{this._generateNavbarElement('https://www.linkedin.com/in/julianbrendl/', '// LinkedIn')}</li>
+          <li
+            style={{marginRight: 0}}>{this._generateNavbarElement('https://www.linkedin.com/in/julianbrendl/', '// LinkedIn')}</li>
         </ul>
       </nav>
     )

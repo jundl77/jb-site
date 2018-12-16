@@ -1,4 +1,5 @@
 import assign from "object-assign"
+
 const EventEmitter = require('events').EventEmitter
 
 const CHANGE_EVENT = 'change'

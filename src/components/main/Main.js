@@ -4,7 +4,7 @@ import VisibleLiveComponent from '../live-components/VisibleLiveComponent'
 
 let email = "julianbrendl@gmail.com"
 
-let reactCode =`
+let reactCode = `
 class extends React.Component {
   render() {
 

@@ -53,6 +53,7 @@ pre {
   -o-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
+
 .header-nav .navbar-toggler span {
   background: #fff;
 }
@@ -63,6 +64,7 @@ pre {
   position: relative;
   font-size: 23px;
 }
+
 .header-nav .navbar-brand span {
   width: 6px;
   height: 6px;
@@ -72,9 +74,11 @@ pre {
   right: -9px;
   float: left;
 }
+
 .header-nav .navbar-nav > li {
   margin: 0 20px 0 20px;
 }
+
 .header-nav .navbar-nav .nav-link {
   position: relative;
   padding: 0;
@@ -85,6 +89,7 @@ pre {
   font-weight: 400;
   letter-spacing: 0.115em;
 }
+
 .header-nav .navbar-nav .nav-link:after {
   content: '';
   position: absolute;
@@ -101,10 +106,12 @@ pre {
   transition: ease all 0.2s;
 
 }
+
 .header-nav .navbar-nav .nav-link:hover:after {
   width: 45%;
   opacity: 0.5;
 }
+
 .header-nav .navbar-nav .nav-link.active:after {
   opacity: 1;
   width: 75%;
@@ -132,6 +139,7 @@ pre {
   -o-transition: ease all 0.3s;
   transition: ease all 0.3s;
 }
+
 .header-nav .navbar-nav > li .sub-menu-toggle {
   float: right;
   color: #fff;
@@ -139,11 +147,13 @@ pre {
   margin-left: 5px;
   margin-top: 4px;
 }
+
 .header-nav .navbar-nav > li:hover .sub-menu {
   opacity: 1;
   pointer-events: auto;
   top: 100%;
 }
+
 .header-nav-light.header-nav .navbar-nav > li .sub-menu-toggle {
   color: #222;
 }
@@ -181,6 +191,7 @@ pre {
 .header-nav .navbar-nav > li .sub-menu li:hover > a {
   padding-left: 28px;
 }
+
 .header-nav .navbar-nav > li .sub-menu li:hover > a:after {
   width: 8px;
 }
@@ -191,6 +202,7 @@ pre {
   padding: 10px 6px;
   outline: none !important;
 }
+
 .navbar-toggler span {
   display: block;
   width: 22px;
@@ -198,13 +210,16 @@ pre {
   border-radius: 1px;
   background: #fff;
 }
+
 .navbar-toggler span + span {
   margin-top: 4px;
   width: 18px;
 }
+
 .navbar-toggler span + span + span {
   width: 10px;
 }
+
 /**/
 
 
@@ -212,7 +227,7 @@ pre {
   top: 0;
   margin-top: 0;
   padding: 12px 10px;
-  background: rgba(0,0,0,.9);
+  background: rgba(0, 0, 0, .9);
   box-shadow: 0px 1px 27px -3px rgba(0, 0, 0, 0.2);
 }
 
@@ -224,13 +239,16 @@ pre {
   color: #3b566e;
   font-weight: 500;
 }
+
 .header-nav-light .navbar-nav .nav-link:after {
   background: #3b566e;
 }
+
 .header-nav-light .navbar-brand {
   color: #3b566e;
   font-weight: 500;
 }
+
 .header-nav-light.fixed-header {
   background: #fff;
 }

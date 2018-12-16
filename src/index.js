@@ -1,8 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import * as transpilationService from './services/transpilationService'
-
 // Import components
 import Main from './components/main/Main'
 import Projects from './components/projects/Projects'
