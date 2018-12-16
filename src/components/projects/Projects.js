@@ -20,14 +20,14 @@ export default class Projects extends React.Component {
 
               <div className="row">
                 <div className="col-lg-6 col-10 center">
-                  <LiveContent image="img/r1.jpg"
+                  <LiveContent image="img/exemplator.png"
                                title="Exemplator"
                                link="https://exemplator.julianbrendl.com"
                                description="A search tool to easily and seamlessly find Java code samples."/>
                 </div>
                 <div className="col-lg-6 col-10 center">
-                  <LiveContent image="img/r1.jpg"
-                               title="Auto-Formatting Tool"
+                  <LiveContent image="img/auto-format.png"
+                               title="Code Auto-Formatting Tool"
                                link="https://github.com/jundl77/auto-format"
                                description="A light-weight javascript auto-formatting library for code snippets."/>
                 </div>

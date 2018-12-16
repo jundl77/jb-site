@@ -18,41 +18,32 @@ export default class LiveContent extends React.Component {
       class extends React.Component {
         render() {
 
-          // Define CSS styles for the UI element
-          const titleStyles = {
-            fontFamily: 'Roboto Mono, monospace'
-          }
-
-          // Define CSS styles for the UI element
-          const textStyles = {
-            fontFamily: 'Roboto Mono, monospace',
-            color: '#707070'
-          }
-
           // Render the UI element
           return (
-            <div className="pl2 pr2">
-              <div className="row pb3" style={{paddingTop: '8px'}}>
+            <div>
+              <div className="row pb3">
                 <div className="col-12 center">
                   <img src="${props.image}"/>
                 </div>
               </div>
-
-              <div className="row pb1" style={{paddingTop: '8px'}}>
-                <div className="col-12">
-                    <h2 style={titleStyles} className="f3">${props.title}</h2>
+              
+              <div className="pl3 pr3">
+                <div className="row pb1" style={{paddingTop: '8px'}}>
+                  <div className="col-12">
+                      <h2 className="f3 mf">${props.title}</h2>
+                  </div>
                 </div>
-              </div>
-
-              <div className="row pb1">
-                <div className="col-12">
-                    <a style={titleStyles} href="${props.link}" target="_blank">See more</a>
+  
+                <div className="row pb1">
+                  <div className="col-12">
+                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">See more</a>
+                  </div>
                 </div>
-              </div>
-
-              <div className="row">
-                <div className="col-12">
-                  <p style={textStyles}>${props.description}</p>
+  
+                <div className="row">
+                  <div className="col-12">
+                    <p style={{color: "#707070"}} className="mf">${props.description}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -94,7 +85,7 @@ export default class LiveContent extends React.Component {
   render() {
     return (
       <Card elevation={10} className="mb4">
-        <CardContent>
+        <CardContent style={{padding: 0}}>
           {this._generateContentElement(this.props)}
         </CardContent>
       </Card>
