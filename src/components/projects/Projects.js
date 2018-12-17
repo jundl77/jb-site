@@ -48,7 +48,7 @@ export default class Projects extends React.Component {
                                description="A network analysis tool."/>
                 </div>
                 <div className="col-lg-6 col-10 center">
-                  <LiveContent image="img/r1.jpg"
+                  <LiveContent image="img/digidali.png"
                                title="Digi Dali"
                                link="https://digidali.co"
                                description="A laser engraving robot built out of legos."/>
