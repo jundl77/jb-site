@@ -11,8 +11,8 @@ if (process.env.NODE_ENV !== "production" || !isProdUrl(SERVER_DOMAIN)) {
   }
 } else {
   ENV_VARS = {
-    SERVER_STATUS_URL_FUNC: (server => `https://${server}scala.${SERVER_DOMAIN}/status`),
-    SERVER_TRANSPILATION_URL_FUNC: (server => `https://${server}scala.${SERVER_DOMAIN}/transpile`)
+    SERVER_STATUS_URL_FUNC: (server => `https://${server}.${SERVER_DOMAIN}/status`),
+    SERVER_TRANSPILATION_URL_FUNC: (server => `https://${server}.${SERVER_DOMAIN}/transpile`)
   }
 }
 

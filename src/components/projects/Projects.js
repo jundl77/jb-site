@@ -62,7 +62,7 @@ export default class Projects extends React.Component {
                                description="A Java API for home automation."/>
                 </div>
                 <div className="col-lg-6 col-10 center">
-                  <LiveContent image="img/r1.jpg"
+                  <LiveContent image="img/sayhi.png"
                                title="SayHi.ai"
                                link="https://github.com/jundl77/auto-format"
                                description="Short text goes here"/>
