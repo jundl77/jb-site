@@ -21,13 +21,13 @@ export default class LiveContent extends React.Component {
           // Render the UI element
           return (
             <div>
-              <div className="row pb3">
+              <div className="row">
                 <div className="col-12 center">
                   <img src="${props.image}"/>
                 </div>
               </div>
               
-              <div className="pl3 pr3">
+              <div className="pl3 pr3 pt3 relative" style={{boxShadow: "rgba(0, 0, 0, 0.2) 0px 0px 15px -1px"}}>
                 <div className="row pb1" style={{paddingTop: '8px'}}>
                   <div className="col-12">
                       <h2 className="f3 mf">${props.title}</h2>
