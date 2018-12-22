@@ -37,6 +37,12 @@ export default class MuiTheme extends React.Component {
             backgroundColor: '#1d1e24',
             fontFamily: 'Roboto Mono, monospace'
           },
+        },
+        MuiFormControlLabel: {
+          label: {
+            fontFamily: 'Roboto Mono, monospace',
+            color: '#212529'
+          }
         }
       }
     })

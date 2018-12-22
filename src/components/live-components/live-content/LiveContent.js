@@ -9,11 +9,30 @@ export default class LiveContent extends React.Component {
   static propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired
   }
 
   _generateContentElement = props => {
+
+    let descr = ''
+
+    switch (this.props.type) {
+      case 'dev':
+        descr = 'Software'
+        break
+      case 'pm':
+        descr = 'Project Management'
+        break
+      case 'data':
+        descr = 'Data Science'
+        break
+      default:
+        // no-op
+    }
+
+
     let reactCode = `
       class extends React.Component {
         render() {
@@ -28,15 +47,22 @@ export default class LiveContent extends React.Component {
               </div>
               
               <div className="pl3 pr3 pt3 relative" style={{boxShadow: "rgba(0, 0, 0, 0.2) 0px 0px 15px -1px"}}>
-                <div className="row pb1" style={{paddingTop: '8px'}}>
+                <div className="row">
+                  <div className="col-12 pb3">
+                    <div style={{color: "#707070"}} className="mf f5">${descr}</div>
+                  </div>
+                </div>
+                
+                <div className="row pb1">
                   <div className="col-12">
                       <h2 className="f3 mf">${props.title}</h2>
                   </div>
                 </div>
   
-                <div className="row pb1">
+                <div className="row pb3">
                   <div className="col-12">
-                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">See more</a>
+                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">Demo </a>
+                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">GitHub</a>
                   </div>
                 </div>
   
