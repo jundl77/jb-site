@@ -4,15 +4,14 @@ import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormControl from '@material-ui/core/FormControl'
-import LiveContent from '../live-components/live-content/LiveContent'
+import LiveProject from '../live-components/live-project/LiveProject'
 import LiveParagraph from '../live-components/live-pp/LivePP'
+import projectData from '../../../data/projectData'
 
 export default class Projects extends React.Component {
 
   constructor(props) {
     super(props)
-
-    this._populateProjects()
 
     this.state = {
       projectType: 'all',
@@ -23,56 +22,27 @@ export default class Projects extends React.Component {
     this.setState({ projectType: event.target.value })
   }
 
-  _populateProjects = () => {
-    this.activeProjects = [
-      ['dev', <LiveContent key="acp1"
-                           image="img/exemplator.png"
-                           type='dev'
-                           title="Exemplator"
-                           link="https://exemplator.julianbrendl.com"
-                           description="A search tool to easily and seamlessly find Java code samples."/>],
-      ['pm', <LiveContent key="acp2"
-                           image="img/auto-format.png"
-                           type='pm'
-                           title="Code Auto-Formatting Tool"
-                           link="https://github.com/jundl77/auto-format"
-                           description="A light-weight javascript auto-formatting library for code snippets."/>]
-    ]
+  _renderHighlightedProjects = () => {
+    let projects = projectData.filter(elem => elem.type === this.state.projectType || this.state.projectType === 'all')
+      .filter(elem => elem.priority)
 
-    this.archivedProjects = [
-      ['dev', <LiveContent key="arp1"
-                           image="img/r1.jpg"
-                           type='dev'
-                           title="Truffle Hog"
-                           link="https://github.com/truffle-hog"
-                           description="A network analysis tool."/>],
-      ['pm', <LiveContent key="arp2"
-                           image="img/digidali.png"
-                           type='pm'
-                           title="Digi Dali"
-                           link="https://digidali.co"
-                           description="A laser engraving robot built out of legos."/>],
-      ['dev', <LiveContent key="arp3"
-                           image="img/r1.jpg"
-                           type='dev'
-                           title="Izou"
-                           link="https://github.com/intellimate"
-                           description="A Java API for home automation."/>],
-      ['data', <LiveContent key="arp4"
-                           image="img/sayhi.png"
-                           type='data'
-                           title="SayHi.ai"
-                           link="https://github.com/jundl77/auto-format"
-                           description="Short text goes here"/>]
-    ]
+    return this._renderProjects(projects)
   }
 
-  _filterProjects = projects => {
-      return projects.filter(elem => elem[0] === this.state.projectType || this.state.projectType === 'all')
+  _renderNormalProjects = () => {
+    let projects = projectData.filter(elem => elem[0] === this.state.projectType || this.state.projectType === 'all')
+      .filter(elem => !elem.priority)
+
+    return this._renderProjects(projects)
   }
 
   _renderProjects = projects => {
-    projects = projects.map(elem => elem[1])
+    projects = projects.map((project, i) => <LiveProject key={'live-project' + i}
+                                                         image={project.image}
+                                                         title={project.title}
+                                                         type={project.type}
+                                                         description={project.description}
+                                                         links={project.links}/>)
 
     let zip = (list1, list2) => list1.map((elem, i) => [elem, list2[i]])
     let tuples = zip(projects, projects.slice(1)).filter((elem, i) => i % 2 === 0)
@@ -89,9 +59,6 @@ export default class Projects extends React.Component {
   }
 
   render() {
-    let activeProjects = this._filterProjects(this.activeProjects)
-    let archiveProjects = this._filterProjects(this.archivedProjects)
-
     return (
       <App title="Projects">
         <div className="container pt4">
@@ -133,23 +100,23 @@ export default class Projects extends React.Component {
 
             <div className="col-md-10 col-xs-9 center pt4">
 
-              <LiveParagraph classes="f3" content="Active Projects"/>
+              <LiveParagraph classes="f3" content="Highlighted Projects"/>
               <LiveParagraph classes="f5 bc pt3 pl3 pr3 tc"
                              content="Either I am currently working on the projects listed below or I am maintaining
                                        them. Either way, you can expect them to be more or less up to date!"/>
               <div className="pt5"/>
 
-              {this._renderProjects(activeProjects)}
+              {this._renderHighlightedProjects()}
             </div>
 
             <div className="col-md-10 col-xs-9 center pt5">
-              <LiveParagraph classes="f3" content="Archived Projects"/>
+              <LiveParagraph classes="f3" content="Remaining Projects"/>
               <LiveParagraph classes="f5 bc pt3 pl3 pr3 tc" content="The projects listed below are <strong>older and no
                 longer maintained.</strong> Dependencies might be outdated and the project in general might no longer
                 work as expected. Be wary."/>
               <div className="pt5"/>
 
-              {this._renderProjects(archiveProjects)}
+              {this._renderNormalProjects()}
               <div className="pt5"/>
             </div>
           </div>

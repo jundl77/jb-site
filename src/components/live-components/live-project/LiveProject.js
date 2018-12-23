@@ -4,18 +4,38 @@ import LiveComponent from '../LiveComponent'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 
-export default class LiveContent extends React.Component {
+export default class LiveProject extends React.Component {
 
   static propTypes = {
     image: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired
+    links: PropTypes.array.isRequired
+  }
+
+  _generateLinks = () => {
+    // eslint-disable-next-line
+    console.log('sdf')
+    let reactCode = this.props.links.reduce((total, elem) => total +
+      `<span className="mf f5">
+                      <a style={{color: "#2196F3"}} href="${elem[1]}" target="_blank" rel="noopener noreferrer">
+                        ${elem[0]}
+                      </a>
+                      <span>  </span>
+                    </span>\n                    `, '')
+
+    return {
+      react: reactCode,
+      scala: '',
+      haksell: '',
+      rust: ''
+    }
   }
 
   _generateContentElement = props => {
 
+    let links = this._generateLinks()
     let descr = ''
 
     switch (this.props.type) {
@@ -61,8 +81,7 @@ export default class LiveContent extends React.Component {
   
                 <div className="row pb3">
                   <div className="col-12">
-                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">Demo </a>
-                      <a style={{color: "#2196F3"}} className="mf" href="${props.link}" target="_blank">GitHub</a>
+                    ${links['react']}
                   </div>
                 </div>
   
