@@ -23,7 +23,7 @@ export const transpile = (code, lang) => {
   return request(requestParams)
     .then(response => {
       if (_checkHTML(response))
-        return response
+        return _unescapeHTML(response)
       else
         throw new Error("Invalid HTML received from server.")
     })
@@ -33,6 +33,12 @@ const _checkHTML = html => {
   const doc = document.createElement('div')
   doc.innerHTML = html
   return doc.innerHTML === html
+}
+
+const _unescapeHTML = html => {
+  html = html.split('&lt;').join('<')
+  html = html.split('&gt;').join('>')
+  return html
 }
 
 const _serverStatusCheck = server => {
