@@ -30,7 +30,7 @@ export default class Projects extends React.Component {
   }
 
   _renderNormalProjects = () => {
-    let projects = projectData.filter(elem => elem[0] === this.state.projectType || this.state.projectType === 'all')
+    let projects = projectData.filter(elem => elem.type === this.state.projectType || this.state.projectType === 'all')
       .filter(elem => !elem.priority)
 
     return this._renderProjects(projects)
