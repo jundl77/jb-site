@@ -46,7 +46,7 @@ const projectData = [
     priority: true,
     image: 'img/word2doc.png',
     title: 'Word2Doc (Bachelor Thesis)',
-    links: [['GitHub', 'https://github.com/jundl77/word2doc'], ['Thesis', 'https://github.com/jundl77/bachelor-thesis']],
+    links: [['GitHub', 'https://github.com/jundl77/word2doc'], ['Thesis', 'https://github.com/jundl77/bachelor-thesis/blob/master/thesis.pdf']],
     description: 'My Bachelor Thesis.'
   }, {
     type: 'pm',
