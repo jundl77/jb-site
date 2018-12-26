@@ -41,6 +41,34 @@ const projectData = [
     title: 'SayHi.ai',
     links: [['Demo', 'https://sayhi-ai.julianbrendl.com'], ['GitHub', 'https://github.com/sayhi-ai']],
     description: 'Short text goes here'
+  }, {
+    type: 'data',
+    priority: true,
+    image: 'img/word2doc.png',
+    title: 'Word2Doc (Bachelor Thesis)',
+    links: [['GitHub', 'https://github.com/jundl77/word2doc'], ['Thesis', 'https://github.com/jundl77/bachelor-thesis']],
+    description: 'My Bachelor Thesis.'
+  }, {
+    type: 'pm',
+    priority: false,
+    image: 'img/twodance.png',
+    title: 'TwoDance',
+    links: [['Website', 'https://twodance.julianbrendl.com']],
+    description: 'Short text goes here'
+  }, {
+    type: 'pm',
+    priority: false,
+    image: 'img/hackundsoehne.png',
+    title: 'Hack & Söhne',
+    links: [['Website', 'https://hackundsoehne.de']],
+    description: 'Short text goes here'
+  }, {
+    type: 'pm',
+    priority: false,
+    image: 'img/och.png',
+    title: 'Open Codes Hackathon',
+    links: [['Website', 'https://opencodes.io']],
+    description: 'Short text goes here'
   }
 ]
 

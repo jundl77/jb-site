@@ -13,6 +13,13 @@ export default class Projects extends React.Component {
   constructor(props) {
     super(props)
 
+    this.projects = projectData.map((project, i) => [project, <LiveProject key={'live-project' + i}
+                                                                                     image={project.image}
+                                                                                     title={project.title}
+                                                                                     type={project.type}
+                                                                                     description={project.description}
+                                                                                     links={project.links}/>])
+
     this.state = {
       projectType: 'all',
     }
@@ -23,26 +30,21 @@ export default class Projects extends React.Component {
   }
 
   _renderHighlightedProjects = () => {
-    let projects = projectData.filter(elem => elem.type === this.state.projectType || this.state.projectType === 'all')
-      .filter(elem => elem.priority)
+    let projects = this.projects.filter(elem => elem[0].type === this.state.projectType || this.state.projectType === 'all')
+      .filter(elem => elem[0].priority)
 
     return this._renderProjects(projects)
   }
 
   _renderNormalProjects = () => {
-    let projects = projectData.filter(elem => elem.type === this.state.projectType || this.state.projectType === 'all')
-      .filter(elem => !elem.priority)
+    let projects = this.projects.filter(elem => elem[0].type === this.state.projectType || this.state.projectType === 'all')
+      .filter(elem => !elem[0].priority)
 
     return this._renderProjects(projects)
   }
 
   _renderProjects = projects => {
-    projects = projects.map((project, i) => <LiveProject key={'live-project' + i}
-                                                         image={project.image}
-                                                         title={project.title}
-                                                         type={project.type}
-                                                         description={project.description}
-                                                         links={project.links}/>)
+    projects = projects.map(elem => elem[1])
 
     let zip = (list1, list2) => list1.map((elem, i) => [elem, list2[i]])
     let tuples = zip(projects, projects.slice(1)).filter((elem, i) => i % 2 === 0)
@@ -100,7 +102,7 @@ export default class Projects extends React.Component {
 
             <div className="col-md-10 col-xs-9 center pt4">
 
-              <LiveParagraph classes="f3" content="Highlighted Projects"/>
+              <LiveParagraph classes="f3" content="Highlighted Projects!"/>
               <LiveParagraph classes="f5 bc pt3 pl3 pr3 tc"
                              content="Either I am currently working on the projects listed below or I am maintaining
                                        them. Either way, you can expect them to be more or less up to date!"/>
@@ -110,7 +112,7 @@ export default class Projects extends React.Component {
             </div>
 
             <div className="col-md-10 col-xs-9 center pt5">
-              <LiveParagraph classes="f3" content="Remaining Projects"/>
+              <LiveParagraph classes="f3" content="More Projects.."/>
               <LiveParagraph classes="f5 bc pt3 pl3 pr3 tc" content="The projects listed below are <strong>older and no
                 longer maintained.</strong> Dependencies might be outdated and the project in general might no longer
                 work as expected. Be wary."/>

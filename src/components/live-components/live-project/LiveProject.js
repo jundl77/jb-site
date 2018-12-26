@@ -69,7 +69,7 @@ export default class LiveProject extends React.Component {
               <div className="pl3 pr3 pt3 relative" style={{boxShadow: "rgba(0, 0, 0, 0.2) 0px 0px 15px -1px"}}>
                 <div className="row">
                   <div className="col-12 pb3">
-                    <div style={{color: "#707070"}} className="mf f5">${descr}</div>
+                    <div className="mf f5">${descr}</div>
                   </div>
                 </div>
                 
