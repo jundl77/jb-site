@@ -69,6 +69,27 @@ const projectData = [
     title: 'Open Codes Hackathon',
     links: [['Website', 'https://opencodes.io']],
     description: 'Short text goes here'
+  }, {
+    type: 'dev',
+    priority: false,
+    image: 'img/och.png',
+    title: 'julianbrendl.com',
+    links: [['Website', 'https://julianbrendl.com']],
+    description: 'Short text goes here'
+  }, {
+    type: 'dev',
+    priority: false,
+    image: 'img/famshare.png',
+    title: 'FamShare',
+    links: [['Demo', 'https://www.youtube.com/watch?v=ElvOb7JfJEo'], ['GitHub', 'https://github.com/jundl77/famshare']],
+    description: 'A free file sharing website for the family to run at home.'
+  }, {
+    type: 'dev',
+    priority: true,
+    image: 'img/ivy.png',
+    title: 'Ivy',
+    links: [['Demo', 'https://www.youtube.com/watch?v=zLyxq9hRDRk'], ['GitHub', 'https://github.com/ivy-bot/ivy-page']],
+    description: 'A website building bot - won largest hackathon in Europe (HackZurich 2016)'
   }
 ]
 
