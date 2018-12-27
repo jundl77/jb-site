@@ -72,7 +72,7 @@ const projectData = [
   }, {
     type: 'dev',
     priority: false,
-    image: 'img/och.png',
+    image: 'img/jb-site.png',
     title: 'julianbrendl.com',
     links: [['Website', 'https://julianbrendl.com']],
     description: 'Short text goes here'

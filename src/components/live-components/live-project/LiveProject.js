@@ -15,8 +15,6 @@ export default class LiveProject extends React.Component {
   }
 
   _generateLinks = () => {
-    // eslint-disable-next-line
-    console.log('sdf')
     let reactCode = this.props.links.reduce((total, elem) => total +
       `<span className="mf f5">
                       <a style={{color: "#2196F3"}} href="${elem[1]}" target="_blank" rel="noopener noreferrer">
@@ -66,7 +64,8 @@ export default class LiveProject extends React.Component {
                 </div>
               </div>
               
-              <div className="pl3 pr3 pt3 relative" style={{boxShadow: "rgba(0, 0, 0, 0.2) 0px 0px 15px -1px"}}>
+              <div className="pl3 pr3 pt3 relative"
+                   style={{boxShadow: "rgba(0, 0, 0, 0.2) 0px 0px 15px -1px", minHeight: "12rem"}}>
                 <div className="row">
                   <div className="col-12 pb3">
                     <div className="mf f5">${descr}</div>

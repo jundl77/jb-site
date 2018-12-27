@@ -6,6 +6,7 @@ export default class LiveParagraph extends React.Component {
 
   static propTypes = {
     classes: PropTypes.string,
+    style: PropTypes.object,
     content: PropTypes.string.isRequired
   }
 
@@ -43,8 +44,13 @@ export default class LiveParagraph extends React.Component {
 
     let rustCode = ''
 
+    let styles = {
+      margin: 'auto',
+      ...this.props.style
+    }
+
     return (
-      <LiveComponent previewStyles={{margin: 'auto'}} code={{
+      <LiveComponent previewStyles={styles} code={{
         'react': reactCode,
         'scala': scalaCode,
         'haskell': haskellCode,
