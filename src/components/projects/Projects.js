@@ -112,24 +112,23 @@ export default class Projects extends React.Component {
 
             <div className="col-md-10 col-xs-9 center pt5">
 
-              <LiveParagraph classes="f3" content="Highlighted Projects"/>
-              <div className="pt5"/>
-
+              <LiveParagraph classes="f3 pb3" content="Highlighted Projects"/>
+              <LiveParagraph classes="f5 pb5"
+                             content="Below you can choose the type of project you want to see:"/>
               {this._renderHighlightedProjects()}
             </div>
 
             <div className="col-md-10 col-xs-9 center pt5">
-              <LiveParagraph classes="f3" content="More Projects"/>
-              <div className="pt5"/>
-
+              <LiveParagraph classes="f3 pb3" content="More Projects"/>
+              <LiveParagraph classes="f5 pb5"
+                             content="Below you can choose the type of project you want to see:"/>
               {this._renderNormalProjects()}
             </div>
 
             <div className="col-md-10 col-xs-9 center pt5">
-              <LiveParagraph classes="f3" content="Even More Projects"/>
-              <LiveParagraph classes="f5 bc pt3 pl3 pr3 tc" content="If you would like to see even more projects, feel
+              <LiveParagraph classes="f3 pb3" content="Even More Projects"/>
+              <LiveParagraph classes="f5 bc pb5 tc" content="If you would like to see even more projects, feel
               free to check out my <a style={{color: '#2196F3'}} href='https://github.com/jundl77' target='_blank' rel='noopener noreferrer'>GitHub</a> page."/>
-              <div className="pt5"/>
             </div>
           </div>
         </div>
