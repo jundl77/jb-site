@@ -26,7 +26,8 @@ export const transpile = (code, lang) => {
       if (_checkHTML(response))
         return _unescapeHTML(response)
       else
-        throw new Error("Invalid HTML received from server.")
+        throw new Error(response)
+      //throw new Error("Invalid HTML received from server.")
     })
 }
 

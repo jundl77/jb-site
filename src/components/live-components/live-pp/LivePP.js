@@ -40,7 +40,14 @@ export default class LiveParagraph extends React.Component {
       }
     `
 
-    let haskellCode = ''
+    let haskellCode = `
+      -- :: String defines styles to be of type string
+      styles :: String
+      styles = "font-family: Roboto Mono, monospace"
+
+      -- div_ is the HTML <div> tag, and A denotes that we want to add attributes to the tag
+      render = div_A (A.style_ styles # A.class_ "${props.classes}") "${props.content}"
+    `
 
     let rustCode = ''
 

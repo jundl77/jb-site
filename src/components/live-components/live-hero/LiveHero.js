@@ -38,7 +38,15 @@ export default class LiveHero extends React.Component {
       }
     `
 
-    let haskellCode = ''
+    let haskellCode = `
+      -- :: String defines styles to be of type string
+      styles :: String
+      styles = "font-family: Roboto Mono, monospace"
+
+      -- h1_ is the HTML <h1> tag, and A denotes that we want to
+      -- add attributes to the tag
+      render = h1_A (A.style_ styles) "${content}"
+    `
 
     let rustCode = ''
 
