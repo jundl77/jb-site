@@ -5,6 +5,7 @@ import constants from "../constants/transpilationConstants"
 
 export const serverStatusChecks = () => {
   _serverStatusCheck('scala')
+  _serverStatusCheck('haskell')
 
   // call every 5 seconds
   setTimeout(serverStatusChecks, 5000)
@@ -58,4 +59,3 @@ const _serverStatusCheck = server => {
       transpilationActions.updateServerStatus(server, false)
     })
 }
-

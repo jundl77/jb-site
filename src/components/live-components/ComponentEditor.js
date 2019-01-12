@@ -61,6 +61,8 @@ export default class ComponentEditor extends React.Component {
         return 'text/x-scala'
       case 'react':
         return 'javascript'
+      case 'haskell':
+        return 'haskell'
     }
   }
 
@@ -190,6 +192,7 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/xml/xml')
       require('codemirror/mode/javascript/javascript')
       require('codemirror/mode/clike/clike')
+      require('codemirror/mode/haskell/haskell')
     }
 
     // Style differently depending on whether it is hoverable or not
