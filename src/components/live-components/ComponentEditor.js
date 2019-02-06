@@ -63,6 +63,8 @@ export default class ComponentEditor extends React.Component {
         return 'javascript'
       case 'haskell':
         return 'haskell'
+      case 'rust':
+        return 'rust'
     }
   }
 
@@ -193,6 +195,7 @@ export default class ComponentEditor extends React.Component {
       require('codemirror/mode/javascript/javascript')
       require('codemirror/mode/clike/clike')
       require('codemirror/mode/haskell/haskell')
+      require('codemirror/mode/rust/rust')
     }
 
     // Style differently depending on whether it is hoverable or not

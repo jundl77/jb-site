@@ -140,7 +140,6 @@ export default class LiveComponent extends React.Component {
           </div>
         </LiveProvider>
         <Popper placement="bottom-start" open={this.state.visiblePopup} anchorEl={this.state.anchor} transition>
-          {/* eslint-disable-next-line */}
           {({TransitionProps}) => (
             <Grow {...TransitionProps} timeout={150}>
               <Button size="small"
