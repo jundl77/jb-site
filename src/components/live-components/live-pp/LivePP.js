@@ -49,7 +49,17 @@ export default class LiveParagraph extends React.Component {
       render = div_A (A.style_ styles # A.class_ "${props.classes}") "${props.content}"
     `
 
-    let rustCode = ''
+    let rustCode = `
+      fn render() -> DOMTree<String> {
+        let styles = "font-family: Roboto Mono, monospace";
+
+        return html!(
+            <div style=styles class="${props.classes}">
+              "${props.content}"
+            </div>
+        );
+      }
+    `
 
     let styles = {
       margin: 'auto',

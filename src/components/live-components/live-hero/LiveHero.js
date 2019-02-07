@@ -48,7 +48,15 @@ export default class LiveHero extends React.Component {
       render = h1_A (A.style_ styles) "${content}"
     `
 
-    let rustCode = ''
+    let rustCode = `
+      fn render() -> DOMTree<String> {
+        let styles = "font-family: Roboto Mono, monospace";
+
+        return html!(
+            <h1 style=styles>"${content}"</h1>
+        );
+      }
+    `
 
     return (
       <LiveComponent previewStyles={{margin: 'auto'}} code={{
