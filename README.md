@@ -4,6 +4,8 @@
 
 My personal website. Every element (with the exception of one or two) is editable in multiple different languages (Haskell, Scala, Rust and React/JSX). You can find the back-ends that power this below.
 
+**URL:** https://julianbrendl.com
+
 ## Build
 
 Run ```npm install``` and ```npm start```.
