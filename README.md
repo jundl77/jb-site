@@ -10,7 +10,7 @@ My personal website. Every element (with the exception of one or two) is editabl
 
 Run ```npm install``` and ```npm start```.
 
-## Backend ends
+## Backend-Ends
 
 **Scala:** [html-scala](https://github.com/jundl77/html-scala)
 
