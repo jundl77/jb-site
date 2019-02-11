@@ -36,7 +36,15 @@ export default class LiveNavbar extends React.Component {
 
     let haskellCode = ''
 
-    let rustCode = ''
+    let rustCode = `
+      fn render() -> DOMTree<String> {
+        let styles = "font-family: Roboto Mono, monospace; color: #707070";
+
+        return html!(
+            <a style=styles href="${url}">"${content}"</a>
+        );
+      }
+    `
 
     return (
       <LiveComponent previewStyles={{margin: 'auto'}} code={{
