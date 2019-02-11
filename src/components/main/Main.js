@@ -47,9 +47,10 @@ class extends React.Component {
           most are not meant for web programming, hehe. This was part of the challenge, how do you edit a website in
           Scala, Haskell or Rust?
         </div>
-
+        
         <div className="pb3">
-		      If you are curious, check out the <a style={linkColor} href="https://github.com/jundl77/jb-site" target="_blank">GitHub repository</a>!
+          If you are curious, check out the
+          <a style={linkColor} href="https://github.com/jundl77/jb-site" target="_blank">GitHub repository</a>!
           Now try it out press some of the buttons below!
         </div>
       </div>
