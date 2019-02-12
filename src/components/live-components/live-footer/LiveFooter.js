@@ -16,21 +16,17 @@ export default class LiveFooter extends React.Component {
 
           // Render the UI element
           return (
-            <footer className="footer pl3 pr3 pt2 pb2">
-              <section className="footer-section">
-                  <div className="footer-copy">
-                    <div className="row">
-                      <div className="col-12">
-                        <p className="f6 dib pr2" style={styles}>
-                          Contact @
-                          <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
-                          julianbrendl@gmail.com</a>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-              </section>
-            </footer>
+            <div className="footer footer-copy">
+              <div className="row">
+                <div className="col-12">
+                  <p className="f6 dib pr2" style={styles}>
+                    Contact @
+                    <a style={{color: '#408EE0'}}href="mailto:julianbrendl@gmail.com">
+                    julianbrendl@gmail.com</a>
+                  </p>
+                </div>
+              </div>
+            </div>
           )
         }
       }
@@ -42,7 +38,7 @@ export default class LiveFooter extends React.Component {
         def email() = "julianbrendl@gmail.com"
 
         override def render(): Text.TypedTag[String] = {
-          div(\`class\` := "footer pl3 pr3 pt2 pb2 footer-section footer-copy") (
+          div(\`class\` := "footer footer-copy") (
             div(\`class\` := "row") (
               div(\`class\` := "col-12") (
                 p(\`class\` := "f6 dib pr2", style := styles()) (
@@ -61,7 +57,7 @@ export default class LiveFooter extends React.Component {
       textClass = "f6 dib pr2"
 
       -- render is the main function, it builds the footer element
-      render = div_A (A.class_ "footer pl3 pr3 pt2 pb2 footer-section footer-copy") (row text)
+      render = div_A (A.class_ "footer footer-copy") (row text)
   
       -- below are the helper functions that generate HTML components to display the footer
       row content = div_A (A.class_ "row") $ div_A (A.class_ "col-12") content
@@ -74,7 +70,7 @@ export default class LiveFooter extends React.Component {
         let styles = "font-family: Roboto Mono, monospace; color: white";
 
         return html!(
-          <div class="footer pl3 pr3 pt2 pb2 footer-section footer-copy">
+          <div class="footer footer-copy">
             <div class="row">
               <div class="col-12">
                 <p class="f6 dib pr2" style=styles>
