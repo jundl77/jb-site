@@ -61,7 +61,7 @@ export default class LiveFooter extends React.Component {
   
       -- below are the helper functions that generate HTML components to display the footer
       row content = div_A (A.class_ "row") $ div_A (A.class_ "col-12") content
-      text = p_A (A.class_ textClass # A.style_ (font ++ "color: white")) "Contact @" # email "julianbrendl@gmail.com"
+      text = p_A (A.class_ textClass # A.style_ (font ++ "color: white")) "Contact @ " # email "julianbrendl@gmail.com"
       email target = a_A (A.class_ textClass # A.style_ (font ++ "color: #408EE0") # A.href_ ("mailto:" ++ target)) target
     `
 
@@ -74,7 +74,7 @@ export default class LiveFooter extends React.Component {
             <div class="row">
               <div class="col-12">
                 <p class="f6 dib pr2" style=styles>
-                  "Contact @"
+                  "Contact @ "
                   <a style="color: #408EE0" href="mailto:julianbrendl@gmail.com">
                   "julianbrendl@gmail.com"</a>
                 </p>
