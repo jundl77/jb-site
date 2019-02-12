@@ -34,7 +34,15 @@ export default class LiveNavbar extends React.Component {
       }
     `
 
-    let haskellCode = ''
+    let haskellCode = `
+       -- :: String defines styles to be of type string
+      styles :: String
+      styles = "font-family: Roboto Mono, monospace"
+
+      -- A_ is the HTML <a> tag, and A denotes that we want to
+      -- add attributes to the tag
+      render = a_A (A.style_ styles # A.href_ "${url}") "${content}"
+    `
 
     let rustCode = `
       fn render() -> DOMTree<String> {

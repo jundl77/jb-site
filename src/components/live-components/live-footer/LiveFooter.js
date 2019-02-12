@@ -38,21 +38,36 @@ export default class LiveFooter extends React.Component {
 
     let scalaCode = `
       new ReactComponent {
-        def myName() = "Julian Brendl"
+        def styles() = "font-family: Roboto Mono, monospace; color: white"
+        def email() = "julianbrendl@gmail.com"
 
         override def render(): Text.TypedTag[String] = {
-          div(
-            h1("Test"),
-            div(
-              p("My name is: " + myName()),
-              p("This is my second paragraph"),
-              p("This is my third paragraph")
+          div(\`class\` := "footer pl3 pr3 pt2 pb2 footer-section footer-copy") (
+            div(\`class\` := "row") (
+              div(\`class\` := "col-12") (
+                p(\`class\` := "f6 dib pr2", style := styles()) (
+                  "Contact @ ",
+                  a(style := "color: #408EE0", href := "mailto:" + email()) (email())
+                )
+              )
             )
           )
         }
       }`
 
-    let haskellCode = ''
+    let haskellCode = `
+      -- define the CSS styles used 
+      font = "font-family: Roboto Mono, monospace;"
+      textClass = "f6 dib pr2"
+
+      -- render is the main function, it builds the footer element
+      render = div_A (A.class_ "footer pl3 pr3 pt2 pb2 footer-section footer-copy") (row text)
+  
+      -- below are the helper functions that generate HTML components to display the footer
+      row content = div_A (A.class_ "row") $ div_A (A.class_ "col-12") content
+      text = p_A (A.class_ textClass # A.style_ (font ++ "color: white")) "Contact @" # email "julianbrendl@gmail.com"
+      email target = a_A (A.class_ textClass # A.style_ (font ++ "color: #408EE0") # A.href_ ("mailto:" ++ target)) target
+    `
 
     let rustCode = `
       fn render() -> DOMTree<String> {
