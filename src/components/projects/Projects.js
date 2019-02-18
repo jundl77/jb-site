@@ -72,16 +72,16 @@ export default class Projects extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-9 col-xs-9 center pt5">
-              <LiveParagraph classes="f5 tj pb3"
+              <LiveParagraph classes="f5 tj"
                              content="These are my projects that I have worked on over the years. Some are new and
                              up-to-date, but others might not be. Some dependencies might be
                              outdated and the project itself might no longer work as expected."/>
 
-              <LiveParagraph classes="f5 tj pb3"
+              <LiveParagraph classes="f5 tj pt3"
                              style={{margin: '0 !important'}}
                              content="Below you can choose the type of project you want to see:"/>
             </div>
-            <div className="col-md-11 col-xs-9 center tc">
+            <div className="col-md-11 col-xs-9 center tc pt3">
               <FormControl component="fieldset">
                 <RadioGroup
                   value={this.state.projectType}
@@ -118,23 +118,26 @@ export default class Projects extends React.Component {
 
             <div className="col-md-11 col-xs-9 center pt5">
 
-              <LiveParagraph classes="f3 pb3" content="Highlighted Projects"/>
-              <LiveParagraph classes="f5 pb5"
+              <LiveParagraph classes="f3" content="Highlighted Projects"/>
+              <LiveParagraph classes="f5 pt3"
                              content="Below you can choose the type of project you want to see:"/>
+              <div className="pt5"/>
               {this._renderHighlightedProjects()}
             </div>
 
             <div className="col-md-11 col-xs-9 center pt5">
-              <LiveParagraph classes="f3 pb3" content="More Projects"/>
-              <LiveParagraph classes="f5 pb5"
+              <LiveParagraph classes="f3" content="More Projects"/>
+              <LiveParagraph classes="f5 pt3"
                              content="Below you can choose the type of project you want to see:"/>
+              <div className="pt5"/>
               {this._renderNormalProjects()}
             </div>
 
             <div className="col-md-9 col-xs-9 center pt5">
-              <LiveParagraph classes="f3 pb3" content="Even More Projects"/>
-              <LiveParagraph classes="f5 bc pb5 tc" content="If you would like to see even more projects, feel
+              <LiveParagraph classes="f3" content="Even More Projects"/>
+              <LiveParagraph classes="f5 bc pt3 tc" content="If you would like to see even more projects, feel
               free to check out my <a style={{color: '#2196F3'}} href='https://github.com/jundl77' target='_blank' rel='noopener noreferrer'>GitHub</a> page."/>
+              <div className="pt5"/>
             </div>
           </div>
         </div>

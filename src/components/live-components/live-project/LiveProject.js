@@ -23,9 +23,16 @@ export default class LiveProject extends React.Component {
                       <span>  </span>
                     </span>\n                    `, '')
 
+    let scalaCodeBlocks = this.props.links.map(elem =>
+     `span( \`class\` := "mf f5") (
+        a(style := "color: #2196F3", href := "${elem[1]}") ("${elem[0]}"),
+        span(" ")
+      )`)
+    let scalaCode =  scalaCodeBlocks.join(",\n")
+
     return {
       react: reactCode,
-      scala: '',
+      scala: scalaCode,
       haksell: '',
       rust: ''
     }
@@ -102,12 +109,40 @@ export default class LiveProject extends React.Component {
 
         override def render(): Text.TypedTag[String] = {
           div(
-            h1("Test"),
-            div(
-              p("My name is: " + myName()),
-              p("This is my second paragraph"),
-              p("This is my third paragraph")
-            )
+            div(\`class\` := "row") (
+              div(\`class\` := "col-12 center") (
+                img(src := "${props.image}")
+              )
+            ),
+            
+            div(\`class\` := "pl3 pr3 pt3 relative",
+                 style := "box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px -1px; min-height: 12rem") (
+              div(\`class\` := "row") (
+                div(\`class\` := "col-12 pb3") (
+                  div(\`class\` := "mf f5") ("${descr}")
+                )
+              ),
+              
+              div(\`class\` := "row pb1") (
+                div(\`class\` := "col-12") (
+                  div(\`class\` := "mf f3") ("${props.title}")
+                )
+              ),
+              
+              div(\`class\` := "row pb3") (
+                div(\`class\` := "col-12") (
+                  ${links['scala']}
+                )
+              ),
+              
+              div(\`class\` := "row") (
+                div(\`class\` := "col-12") (
+                  p(\`class\` := "mf", style := "color: #707070") (
+                    "${props.description}"
+                  )
+                )
+              )
+            ) 
           )
         }
       }`

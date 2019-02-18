@@ -2,6 +2,7 @@ import * as request from "request-promise"
 import * as transpilationActions from "../actions/transpilationAction"
 import constants from "../constants/transpilationConstants"
 import he from 'he'
+import isHTML from 'is-html'
 
 export const serverStatusChecks = () => {
   _serverStatusCheck('scala')
@@ -25,18 +26,12 @@ export const transpile = (code, lang) => {
   return request(requestParams)
     .then(response => {
       let unescapedHTML = he.decode(response)
-      if (_checkHTML(unescapedHTML))
+      if (isHTML(unescapedHTML))
         return unescapedHTML
       else
         throw new Error(response)
       //throw new Error("Invalid HTML received from server.")
     })
-}
-
-const _checkHTML = html => {
-  const doc = document.createElement('div')
-  doc.innerHTML = html
-  return doc.innerHTML === html
 }
 
 const _serverStatusCheck = server => {

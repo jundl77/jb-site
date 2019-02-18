@@ -34,6 +34,8 @@ export default class ComponentEditor extends React.Component {
   constructor(props) {
     super(props)
 
+    this.editorRefreshed = false
+
     this.state = {
       visible: props.visible,
       editorDisplay: 'none',
@@ -183,6 +185,14 @@ export default class ComponentEditor extends React.Component {
     return actionMenu
   }
 
+  _refreshEditor() {
+    // Hack to make reload work
+    if (this.instance && !this.editorRefreshed) {
+      setTimeout(()=> this.instance.refresh(), 200)
+      this.editorRefreshed = true
+    }
+  }
+
   render() {
     const options = {
       mode: this._getMode(),
@@ -208,17 +218,13 @@ export default class ComponentEditor extends React.Component {
           <CodeMirror value={this.props.code}
                       onChange={this.props.onChange}
                       options={options}
-                      style={{height: '400px'}}
                       autoCursor={false}/>
           {this._getActionMenu()}
         </div>
       )
     }
 
-    // Hack to make reload work
-    if (this.instance) {
-      setTimeout(()=> this.instance.refresh(), 100)
-    }
+    this._refreshEditor()
 
     return (
       <Card elevation={3}>
@@ -236,12 +242,7 @@ export default class ComponentEditor extends React.Component {
                     onChange={this.props.onChange}
                     options={options}
                     autoCursor={false}
-                    editorDidMount={editor => {
-                      this.instance = editor
-                    }}
-                    onBeforeChange={(editor, data, value) => {
-                      this.setState({ text: value })
-                    }}
+                    editorDidMount={editor => { this.instance = editor }}
         />
         {this._getActionMenu()}
       </Card>
