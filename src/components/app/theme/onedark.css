@@ -5,6 +5,10 @@
 */
 
 /* basic */
+.CodeMirror {
+    height: 350px
+}
+
 .cm-s-one-dark {
     font-family: Menlo, Consolas, 'DejaVu Sans Mono', monospace;
     font-weight: 350;

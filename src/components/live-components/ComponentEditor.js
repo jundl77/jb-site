@@ -208,18 +208,23 @@ export default class ComponentEditor extends React.Component {
           <CodeMirror value={this.props.code}
                       onChange={this.props.onChange}
                       options={options}
+                      style={{height: '400px'}}
                       autoCursor={false}/>
           {this._getActionMenu()}
         </div>
       )
     }
 
+    // Hack to make reload work
+    if (this.instance) {
+      setTimeout(()=> this.instance.refresh(), 100)
+    }
+
     return (
       <Card elevation={3}>
-        <AppBar position="static" color="default" root={{backgroundColor: 'white'}} elevation={0}>
+        <AppBar position="static" color="default" style={{backgroundColor: 'white'}} elevation={0}>
           <Toolbar>
-            <Button color="inherit"
-                    onClick={this.props.onClose}
+            <Button onClick={this.props.onClose}
                     aria-label="Menu"
                     style={{display: 'inline-block', outlineWidth: 0}}>
               <CloseIcon/>
@@ -227,7 +232,17 @@ export default class ComponentEditor extends React.Component {
             {this._getTabs()}
           </Toolbar>
         </AppBar>
-        <CodeMirror value={this.props.code} onChange={this.props.onChange} options={options} autoCursor={false}/>
+        <CodeMirror value={this.props.code}
+                    onChange={this.props.onChange}
+                    options={options}
+                    autoCursor={false}
+                    editorDidMount={editor => {
+                      this.instance = editor
+                    }}
+                    onBeforeChange={(editor, data, value) => {
+                      this.setState({ text: value })
+                    }}
+        />
         {this._getActionMenu()}
       </Card>
     )

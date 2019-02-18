@@ -97,7 +97,7 @@ export default class Main extends React.Component {
       <App title="Julian Brendl">
         <div className="container pt5">
           <div className="row pb5">
-            <div className="col-md-10 col-xs-9 center">
+            <div className="col-md-9 col-xs-9 center">
               <VisibleLiveComponent previewStyles={{margin: 'auto'}} code={{
                 'react': reactCode,
                 'scala': scalaCode,

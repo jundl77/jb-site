@@ -46,16 +46,22 @@ export default class Projects extends React.Component {
   _renderProjects = projects => {
     projects = projects.map(elem => elem[1])
 
-    let zip = (list1, list2) => list1.map((elem, i) => [elem, list2[i]])
-    let tuples = zip(projects, projects.slice(1)).filter((elem, i) => i % 2 === 0)
+    const toChunks = (array, chunk_size) => array
+      .map((_, i, all) => all.slice(i*chunk_size, (i+1) * chunk_size))
+      .filter(x => x.length)
 
-    return tuples.map((tuple, i) =>
+    let chunks = toChunks(projects, 3)
+
+    return chunks.map((chunks, i) =>
       <div key={"apr" + i} className="row">
-        <div className="col-lg-6 col-10 center">
-          {tuple[0]}
+        <div className="col-lg-4 col-10 center">
+          {chunks[0]}
         </div>
-        <div className="col-lg-6 col-10 center">
-          {tuple[1]}
+        <div className="col-lg-4 col-10 center">
+          {chunks[1]}
+        </div>
+        <div className="col-lg-4 col-10 center">
+          {chunks[2]}
         </div>
       </div>)
   }
@@ -65,7 +71,7 @@ export default class Projects extends React.Component {
       <App title="Projects">
         <div className="container">
           <div className="row">
-            <div className="col-md-10 col-xs-9 center pt5">
+            <div className="col-md-9 col-xs-9 center pt5">
               <LiveParagraph classes="f5 tj pb3"
                              content="These are my projects that I have worked on over the years. Some are new and
                              up-to-date, but others might not be. Some dependencies might be
@@ -75,7 +81,7 @@ export default class Projects extends React.Component {
                              style={{margin: '0 !important'}}
                              content="Below you can choose the type of project you want to see:"/>
             </div>
-            <div className="col-md-10 col-xs-9 center tc">
+            <div className="col-md-11 col-xs-9 center tc">
               <FormControl component="fieldset">
                 <RadioGroup
                   value={this.state.projectType}
@@ -110,7 +116,7 @@ export default class Projects extends React.Component {
               </FormControl>
             </div>
 
-            <div className="col-md-10 col-xs-9 center pt5">
+            <div className="col-md-11 col-xs-9 center pt5">
 
               <LiveParagraph classes="f3 pb3" content="Highlighted Projects"/>
               <LiveParagraph classes="f5 pb5"
@@ -118,14 +124,14 @@ export default class Projects extends React.Component {
               {this._renderHighlightedProjects()}
             </div>
 
-            <div className="col-md-10 col-xs-9 center pt5">
+            <div className="col-md-11 col-xs-9 center pt5">
               <LiveParagraph classes="f3 pb3" content="More Projects"/>
               <LiveParagraph classes="f5 pb5"
                              content="Below you can choose the type of project you want to see:"/>
               {this._renderNormalProjects()}
             </div>
 
-            <div className="col-md-10 col-xs-9 center pt5">
+            <div className="col-md-9 col-xs-9 center pt5">
               <LiveParagraph classes="f3 pb3" content="Even More Projects"/>
               <LiveParagraph classes="f5 bc pb5 tc" content="If you would like to see even more projects, feel
               free to check out my <a style={{color: '#2196F3'}} href='https://github.com/jundl77' target='_blank' rel='noopener noreferrer'>GitHub</a> page."/>
