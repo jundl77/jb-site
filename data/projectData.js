@@ -26,21 +26,21 @@ const projectData = [
     image: 'img/izou.png',
     title: 'Izou',
     links: [['GitHub', 'https://github.com/intellimate']],
-    description: 'A Java API for home automation.'
+    description: 'A Java API for home automation with a Raspberry Pi.'
   }, {
     type: 'dev',
     priority: false,
     image: 'img/truffle-hog.png',
     title: 'Truffle Hog',
     links: [['GitHub', 'https://github.com/truffle-hog']],
-    description: 'A network analysis tool.'
+    description: 'A network analysis tool for industrial machines (university project).'
   }, {
     type: 'dev',
     priority: false,
     image: 'img/sayhi.png',
     title: 'SayHi.ai',
     links: [['Demo', 'https://sayhi-ai.julianbrendl.com'], ['GitHub', 'https://github.com/sayhi-ai']],
-    description: 'Short text goes here'
+    description: 'A Node.JS API that generates human-like responses for conversational bots.'
   }, {
     type: 'data',
     priority: true,
@@ -54,28 +54,28 @@ const projectData = [
     image: 'img/twodance.png',
     title: 'TwoDance',
     links: [['Website', 'https://twodance.julianbrendl.com']],
-    description: 'Short text goes here'
+    description: 'Result of a 2 month startup incubator program (in German).'
   }, {
     type: 'pm',
     priority: false,
     image: 'img/hackundsoehne.png',
     title: 'Hack & Söhne',
     links: [['Website', 'https://hackundsoehne.de']],
-    description: 'Short text goes here'
+    description: 'A non-profit organization I founded that organizes tech events.'
   }, {
     type: 'pm',
-    priority: false,
+    priority: true,
     image: 'img/och.png',
     title: 'Open Codes Hackathon',
-    links: [['Website', 'https://opencodes.io']],
-    description: 'Short text goes here'
+    links: [['Aftermovie', 'https://www.youtube.com/watch?v=-a3AVD9Izk0'], ['Website', 'https://opencodes.io']],
+    description: 'Lead organization of biggest student-run hackathon in Germany (200 people).'
   }, {
     type: 'dev',
     priority: false,
     image: 'img/jb-site.png',
     title: 'julianbrendl.com',
-    links: [['Website', 'https://julianbrendl.com']],
-    description: 'Short text goes here'
+    links: [['GitHub', 'https://github.com/jundl77/jb-site']],
+    description: 'The story behind this website.'
   }, {
     type: 'dev',
     priority: false,
@@ -92,6 +92,5 @@ const projectData = [
     description: 'A website building bot - won largest hackathon in Europe (HackZurich 2016)'
   }
 ]
-
 
 export default projectData
