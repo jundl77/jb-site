@@ -231,8 +231,9 @@ export default class ComponentEditor extends React.Component {
         <AppBar position="static" color="default" style={{backgroundColor: 'white'}} elevation={0}>
           <Toolbar>
             <Button onClick={this.props.onClose}
-                    aria-label="Menu"
-                    style={{display: 'inline-block', outlineWidth: 0}}>
+                    color="primary"
+                    size="small"
+                    style={{outlineWidth: 0, marginRight: "0.25rem"}}>
               <CloseIcon/>
             </Button>
             {this._getTabs()}
