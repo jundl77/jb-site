@@ -1,6 +1,7 @@
 import * as request from "request-promise"
 import * as transpilationActions from "../actions/transpilationAction"
 import constants from "../constants/transpilationConstants"
+import HtmlRepair from "../util/htmlRepair"
 import he from 'he'
 import isHTML from 'is-html'
 
@@ -23,11 +24,13 @@ export const transpile = (code, lang) => {
     json: true // Automatically stringifies the body to JSON
   }
 
+  const htmlRepair = new HtmlRepair()
+
   return request(requestParams)
     .then(response => {
       let unescapedHTML = he.decode(response)
       if (isHTML(unescapedHTML))
-        return unescapedHTML
+        return htmlRepair.repair(unescapedHTML)
       else
         throw new Error(response)
       //throw new Error("Invalid HTML received from server.")
@@ -51,3 +54,4 @@ const _serverStatusCheck = server => {
       transpilationActions.updateServerStatus(server, false)
     })
 }
+

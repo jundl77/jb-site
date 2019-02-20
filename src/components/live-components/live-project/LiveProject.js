@@ -25,15 +25,18 @@ export default class LiveProject extends React.Component {
 
     let scalaCodeBlocks = this.props.links.map(elem =>
      `span( \`class\` := "mf f5") (
-        a(style := "color: #2196F3", href := "${elem[1]}") ("${elem[0]}"),
+        a(style := "color: #2196F3", href := "${elem[1]}", target := "_blank", rel := "noopener noreferrer") ("${elem[0]}"),
         span(" ")
       )`)
     let scalaCode =  scalaCodeBlocks.join(",\n")
 
+    let haskellCodeBlocks = this.props.links.map(elem => `(link "${elem[1]}" "${elem[0]}")`)
+    let haskellCode =  haskellCodeBlocks.join(" # ")
+
     return {
       react: reactCode,
       scala: scalaCode,
-      haksell: '',
+      haskell: haskellCode,
       rust: ''
     }
   }
@@ -147,7 +150,27 @@ export default class LiveProject extends React.Component {
         }
       }`
 
-    let haskellCode = ''
+    let haskellCode = `
+      -- Main function, this renders the element 
+      render = div_ (image # body (projectType # title # links # description))
+      
+      -- General functions that envelop other functions
+      body = div_A (A.class_ "pl3 pr3 pt3 relative" #
+                    A.style_ "box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px -1px; min-height: 12rem")
+                    
+      -- Specific component definitions for each component. Each of these function is independent of anything else
+      image = div_A (A.class_ "row") (div_A (A.class_ "col-12 center") (img_A (A.src_ "${props.image}")))
+      projectType = div_A (A.class_ "row") (div_A (A.class_ "col-12 pb3") (div_A (A.class_ "mf f5") ("${descr}")))
+      title = div_A (A.class_ "row pb1") (div_A (A.class_ "col-12") (div_A (A.class_ "mf f3") ("${props.title}")))
+      links = div_A (A.class_ "row pb3") (div_A (A.class_ "col-12")
+              (${links['haskell']}))
+      description = div_A (A.class_ "row") (div_A (A.class_ "col-12") (div_A (A.class_ "mf" # A.style_ "color: #707070")
+                    ("${props.description}")))
+      
+      -- Helper functions, here used for link generation
+      linkAttributes url = A.style_ "color: #2196F3" # A.href_ url # A.target_ "_blank" # A.rel_ "noopener noreferrer"
+      link url name = span_A (A.class_ "mf f5") ((a_A (linkAttributes url) name) # span_ " ")
+    `
 
     let rustCode = ''
 
