@@ -33,7 +33,7 @@ export default class LiveProject extends React.Component {
     let haskellCodeBlocks = this.props.links.map(elem => `(link "${elem[1]}" "${elem[0]}")`)
     let haskellCode =  haskellCodeBlocks.join(" # ")
 
-    let rustCodeBlocks = this.props.links.map(elem => `{ text!(renderLinks(&"${elem[0]}", &"${elem[1]}")) }`)
+    let rustCodeBlocks = this.props.links.map(elem => `{ text!(render_links(&"${elem[0]}", &"${elem[1]}")) }`)
     let rustCode = rustCodeBlocks.join("\n                  ")
 
 
@@ -178,10 +178,11 @@ export default class LiveProject extends React.Component {
     `
 
     let rustCode = `
-      fn renderLinks(name: &str, url: &str) -> String {
+      fn render_links(name: &str, url: &str) -> String {
         return format!("
           <span class=\\"mf f5\\">
-            <a style=\\"color: #2196F3\\" href=\\"{}\\">{} </a>
+            <a style=\\"color: #2196F3\\" href=\\"{}\\">{}</a>
+            <span> </span>
           </span>
         ", url, name);
       }
