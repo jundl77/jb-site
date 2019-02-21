@@ -33,11 +33,15 @@ export default class LiveProject extends React.Component {
     let haskellCodeBlocks = this.props.links.map(elem => `(link "${elem[1]}" "${elem[0]}")`)
     let haskellCode =  haskellCodeBlocks.join(" # ")
 
+    let rustCodeBlocks = this.props.links.map(elem => `{ text!(renderLinks(&"${elem[0]}", &"${elem[1]}")) }`)
+    let rustCode = rustCodeBlocks.join("\n                  ")
+
+
     return {
       react: reactCode,
       scala: scalaCode,
       haskell: haskellCode,
-      rust: ''
+      rust: rustCode
     }
   }
 
@@ -157,6 +161,7 @@ export default class LiveProject extends React.Component {
       -- General functions that envelop other functions
       body = div_A (A.class_ "pl3 pr3 pt3 relative" #
                     A.style_ "box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px -1px; min-height: 12rem")
+      divWrapper
                     
       -- Specific component definitions for each component. Each of these function is independent of anything else
       image = div_A (A.class_ "row") (div_A (A.class_ "col-12 center") (img_A (A.src_ "${props.image}")))
@@ -172,7 +177,54 @@ export default class LiveProject extends React.Component {
       link url name = span_A (A.class_ "mf f5") ((a_A (linkAttributes url) name) # span_ " ")
     `
 
-    let rustCode = ''
+    let rustCode = `
+      fn renderLinks(name: &str, url: &str) -> String {
+        return format!("
+          <span class=\\"mf f5\\">
+            <a style=\\"color: #2196F3\\" href=\\"{}\\">{} </a>
+          </span>
+        ", url, name);
+      }
+      
+      fn render() -> DOMTree<String> {
+        return html!(
+          <div>
+            <div class="row">
+              <div class="col-12 center">
+                <img src="${props.image}"/>
+              </div>
+            </div>
+            
+            <div class="pl3 pr3 pt3 relative"
+                 style="box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 15px -1px; min-height: 12rem">
+              <div class="row">
+                <div class="col-12 pb3">
+                  <div class="mf f5">"${descr}"</div>
+                </div>
+              </div>
+              
+              <div class="row pb1">
+                <div class="col-12">
+                    <h2 class="f3 mf">"${props.title}"</h2>
+                </div>
+              </div>
+
+              <div class="row pb3">
+                <div class="col-12">
+                  ${links['rust']}
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <p style="color: #707070" class="mf">"${props.description}"</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+    `
 
     return (
       <LiveComponent previewStyles={{margin: 'auto'}} code={{
