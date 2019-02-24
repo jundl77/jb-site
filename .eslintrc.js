@@ -17,7 +17,7 @@ module.exports = {
   ],
   'rules': {
     "react/react-in-jsx-scope": "off",
-    'max-len': [2, 125, 4, {ignoreComments: true, ignoreUrls: true}],
+    'max-len': [2, 130, 4, {ignoreComments: true, ignoreUrls: true}],
     'new-cap': ['error', { 'capIsNew': false }],
     'semi': ['error', 'never']
   }
