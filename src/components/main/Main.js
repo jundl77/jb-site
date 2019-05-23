@@ -23,7 +23,7 @@ class extends React.Component {
         <h1 className="pb3">Hi!</h1>
 
         <div className="pb3">
-          I'm Julian, I'm 22, and I'm a software engineer at Optiver!
+          I'm Julian, I'm 23, and I'm a software engineer at Optiver!
         </div>
   
         <div className="pb3">
@@ -41,8 +41,8 @@ class extends React.Component {
 
         <div className="pb3">
           Glad you ask! If you <strong>hover over any element on this website </strong>
-          (except for this one), you will be able to edit the component using multiple different languages, of which
-          most are not meant for web programming, hehe. This was part of the challenge, how do you edit a website in
+          (except for this one), you will be able to edit the element using multiple different languages, of which
+          most are not meant for web programming. This was part of the challenge, how do you edit a website in
           Scala, Haskell or Rust?
         </div>
         
@@ -68,7 +68,7 @@ let scalaCode = `
       // Render introduction
       div(style := styles()) (
         h1(\`class\` := "pb3")("Hi!"),
-        div(\`class\` := "pb3")("I'm Julian, I'm 22, and I'm a software engineer at Optiver!"),
+        div(\`class\` := "pb3")("I'm Julian, I'm 23, and I'm a software engineer at Optiver!"),
         div(\`class\` := "pb3")(
           """I have a bachelors degree in computer-science from the KIT in Germany, where I focused on data science
           and machine learning (NLP). I have a solid background in programming, and I love to create
@@ -83,8 +83,8 @@ let scalaCode = `
         div(\`class\` := "pb3")(
           "Glad you ask! If you ", 
           strong("hover over any element on this website "),
-          """(except for this one), you will be able to edit the component using multiple different languages, of which
-          most are not meant for web programming, hehe. This was part of the challenge, how do you edit a website in
+          """(except for this one), you will be able to edit the element using multiple different languages, of which
+          most are not meant for web programming. This was part of the challenge, how do you edit a website in
           Scala, Haskell or Rust?"""
         ),
         
@@ -103,7 +103,7 @@ let haskellCode = `
 render = wrapper (firstSection # secondSection)
 
 firstSection = h1_A (A.class_ "pb3") "Hi!" #
-               pb3Div "I'm Julian, I'm 22, and I'm a software engineer at Optiver!" #
+               pb3Div "I'm Julian, I'm 23, and I'm a software engineer at Optiver!" #
                pb3Div "I have a bachelors degree in computer-science from the KIT in Germany, where I focused on data \\
                        \\science and machine learning (NLP). I have a solid background in programming, and I love to create \\
                        \\new things. I enjoy any challenge, with a special affinity for data related problems." #
@@ -113,8 +113,8 @@ firstSection = h1_A (A.class_ "pb3") "Hi!" #
 secondSection = h1_A (A.class_ "pb3 pt3") "What is this Website?" #
                 pb3Div ("Glad you ask! If you " #
                        strong_ "hover over any element on this website " #
-                       "(except for this one), you will be able to edit the component using multiple different languages, of \\
-                       \\which most are not meant for web programming, hehe. This was part of the challenge, how do you edit a \\
+                       "(except for this one), you will be able to edit the element using multiple different languages, of \\
+                       \\which most are not meant for web programming. This was part of the challenge, how do you edit a \\
                        \\website in Scala, Haskell or Rust?") #
                 pb3Div ("If you are curious, check out the " #
                       a_A (A.style_ linkColor # A.href_ "https://github.com/jundl77/jb-site") "GitHub repository" #
@@ -137,7 +137,7 @@ fn render() -> DOMTree<String> {
         <h1 class="pb3">"Hi!"</h1>
 
         <div class="pb3">
-          "I'm Julian, I'm 22, and I'm a software engineer at Optiver!"
+          "I'm Julian, I'm 23, and I'm a software engineer at Optiver!"
         </div>
   
         <div class="pb3">
@@ -156,8 +156,8 @@ fn render() -> DOMTree<String> {
         <div class="pb3">
           "Glad you ask! If you "
           <strong>"hover over any element on this website "</strong>
-          "(except for this one), you will be able to edit the component using multiple different languages, of which
-          most are not meant for web programming, hehe. This was part of the challenge, how do you edit a website in
+          "(except for this one), you will be able to edit the element using multiple different languages, of which
+          most are not meant for web programming. This was part of the challenge, how do you edit a website in
           Scala, Haskell or Rust?"
         </div>
         
